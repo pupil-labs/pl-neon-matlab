@@ -28,7 +28,8 @@ disp(device.send_event('test event 1'));
 
 pause(5);
 
-% send event with current timestamp
+% send event with current timestamp (make sure it is an integer,
+% otherwise you will get a cryptic error!)
 disp(device.send_event('test event 2', get_ns()));
 
 % event 1 is sent before recording starts.
@@ -65,9 +66,8 @@ plot(gaze_sample.x, gaze_sample.y, 'ro', 'MarkerSize', 30, 'LineWidth', 4);
 
 imu_sample = device.receive_imu_datum();
 
-% dt = datetime.fromtimestamp(imu_sample.timestamp_unix_seconds);
-dt = imu_sample.timestamp_unix_seconds;
-disp(['This IMU sample was recorded at ', num2str(dt)]);
+dt = secToDateTime(imu_sample.timestamp_unix_seconds);
+disp(['This IMU sample was recorded at ', char(dt)]);
 
 disp('It contains the following data:');
 

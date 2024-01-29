@@ -27,4 +27,4 @@ function [mat] = ndarray2mat(arr, nr, nc, nl)
   endif
   
   return;
-  end
+endfunction

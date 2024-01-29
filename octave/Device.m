@@ -98,7 +98,7 @@ classdef Device
       event.name = char(evt.name);
       event.recording_id = char(evt.recording_id);
       event.timestamp_unix_ns = double(evt.timestamp);
-      event.datetime = char(evt.datetime);
+      event.datetime = datestr(datenum(evt.datetime(1:end-3), 'yyyy-mm-dd HH:MM:SS.FFF'));
       
       return;
     endfunction
