@@ -83,7 +83,9 @@ If you have reason to use Octave, first note the following:
 - It is limited in functionality relative to MATLAB
 - It is less tested
 
-However, if you still have need for the Octave-Neon integration, then keep in mind
+That said, it is free and open-source.
+
+If you have need for the Octave-Neon integration, then keep in mind
 that there is presently no clean and fast way to convert numpy arrays to Octave arrays.
 This means that you will not be able to inspect the eye or scene camera video frames.
 Otherwise, there is feature parity with the MATLAB integration.
