@@ -21,7 +21,7 @@ https://apps.microsoft.com/detail/9NRWMJP3717K?hl=en-us&gl=US
 
 Ensure that it is from the "Python Software Foundation". It should be free of charge.
 
-Once installed, start a terminal (Start and then enter "cmd.exe") and enter the following to install the necessary packages:
+Once Python is installed, start a terminal (Go to Start Menu and then enter "cmd.exe"). Then, enter the following to install the necessary packages:
 
 ```
 pip install opencv-python
