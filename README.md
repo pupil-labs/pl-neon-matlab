@@ -92,7 +92,13 @@ Otherwise, there is feature parity with the MATLAB integration.
 
 First, follow the same install steps as those for MATLAB for your system, making sure to put the functions from the octave folder on your Octave path. Do not use the functions in the matlab folder for an Octave installation.
 
-Next, install the pythonic package from Octave Forge:
+If you are on Linux, then you will need to install the development files for Octave. On Ubuntu, run the following command in the terminal:
+
+```
+sudo apt install liboctave-dev
+```
+
+Next, install the pythonic package from Octave Forge. Run the following command within Octave:
 
 ```
 pkg install -forge pythonic
