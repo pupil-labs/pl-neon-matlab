@@ -1,9 +1,11 @@
 # Pupil Labs Neon-Psychtoolbox integration
 
 Use MATLAB and Octave's Python interfaces to run functions directly from the 
-pupillabs-realtime-api.
+pupil-labs-realtime-api.
 
-This package requires the installation of Psychtoolbox for accurate timestamping of events. Please see the standard Psychtoolbox installation instructions and first make sure that Psychtoolbox is properly installed and functioning.
+This package requires the installation of Psychtoolbox for accurate timestamping of events. Please see the standard Psychtoolbox installation instructions and first make sure that Psychtoolbox is properly installed and functioning:
+
+http://psychtoolbox.org/download.html
 
 Note that this package is currently only tested on Ubuntu 20.04 LTS.
 
