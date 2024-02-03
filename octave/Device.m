@@ -207,7 +207,7 @@ classdef Device
     endfunction
     
     function close(obj)
-      obj.py_device.close()
+      obj.py_device.close();
       
       return;
     endfunction
