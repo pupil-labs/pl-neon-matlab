@@ -215,12 +215,14 @@ classdef Device
             estimate.time_offset_ms.median = est.time_offset_ms.median;
             estimate.time_offset_ms.std = est.time_offset_ms.std;
 %             estimate.time_offset_ms.measurements = double(est.roundtrip_duration_ms.measurements)';
+            estimate.time_offset_ms.measurements = cellfun(@double, cell(est.roundtrip_duration_ms.measurements))';
 
             estimate.roundtrip_duration_ms = struct();
             estimate.roundtrip_duration_ms.mean = est.roundtrip_duration_ms.mean;
             estimate.roundtrip_duration_ms.median = est.roundtrip_duration_ms.median;
             estimate.roundtrip_duration_ms.std = est.roundtrip_duration_ms.std;
 %             estimate.roundtrip_duration_ms.measurements = double(est.roundtrip_duration_ms.measurements)';
+            estimate.roundtrip_duration_ms.measurements = cellfun(@double, cell(est.roundtrip_duration_ms.measurements))';
 
             return;
         end
