@@ -5,9 +5,9 @@ classdef GazeMapper
 
     methods
         function [obj] = GazeMapper(calibration)
-            arguments
-                calibration Calibration
-            end
+%             arguments
+%                 calibration Calibration
+%             end
 
             obj.py_gaze_mapper = py.pupil_labs.real_time_screen_gaze.gaze_mapper.GazeMapper(calibration.py_calibration);
 
@@ -23,10 +23,10 @@ classdef GazeMapper
         end
 
         function [res] = process_frame(obj, sc_gz_sample)
-            arguments
-                obj GazeMapper
-                sc_gz_sample SceneGazeSample
-            end
+%             arguments
+%                 obj GazeMapper
+%                 sc_gz_sample SceneGazeSample
+%             end
 
             res = obj.py_gaze_mapper.process_frame(sc_gz_sample.py_scene_sample, sc_gz_sample.py_gaze_sample);
 

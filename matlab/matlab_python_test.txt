@@ -1,0 +1,71 @@
+python 3.8, 2019a - 0.005 s mean, cannot get at scene/eye images
+
+python 3.7, 2019a - 0.0055 s mean, 0.0038 s median can get at scene/eye images
+	Mean roundtrip duration: 7.4 ms
+
+in both cases, need to set python version manually
+	- pyversion /Library/Frameworks/Python.framework/Versions/3.7/bin/python3.7
+
+current matlab cost
+	- student 69
+	- home 119
+	- many universities and labs have up-to-date licenses for matlab
+	- do we get in trouble since i am using an academic license?
+
+- it seems the packages need to be first loaded into python one time before they become compiled/available to matlab? is this mac specific?
+- then restart matlab
+
+- check effect of red battery on eye/scene image quality
+
+for python3.7, need the following:
+	opencv-python==4.5.1.48
+	opencv-contrib-python==4.5.1.48
+
+for python3.8, need the following:
+	opencv-python==4.5.1.48
+	opencv-contrib-python==4.5.1.48
+
+Scene camera matrix:
+  824.1289  824.1289  824.1289
+  612.2807  612.2807  612.2807
+    1.0000    1.0000    1.0000
+
+Scene distortion coefficients:
+   -0.1305
+    0.1092
+   -0.0002
+   -0.0004
+    0.0007
+    0.1708
+    0.0523
+    0.0266
+
+Right camera matrix:
+   99.2320   99.2320   99.2320
+   96.1904   96.1904   96.1904
+    1.0000    1.0000    1.0000
+
+Right distortion coefficients:
+    0.0368
+   -0.1237
+    0.0011
+   -0.0007
+   -0.6500
+   -0.0523
+    0.0097
+   -0.6941
+
+Left camera matrix:
+   93.9469   93.9469   93.9469
+   96.6397   96.6397   96.6397
+    1.0000    1.0000    1.0000
+
+Left distortion coefficients:
+    0.0517
+   -0.1179
+   -0.0019
+    0.0011
+   -0.6088
+   -0.0475
+    0.0242
+   -0.6509

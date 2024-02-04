@@ -6,7 +6,7 @@ classdef Device
     properties
         phone_ip char
         phone_name char
-        battery_level_percent double
+        battery_level_percent char
         memory_num_free_bytes double
         module_serial char
         clock_offset_ns double
@@ -14,13 +14,13 @@ classdef Device
 
     methods
         function [obj] = Device(ip, port)
-            arguments
-                ip char = '192.168.1.172'
-                % if connected via hotspot, then this address does not
-                % work?
-                % ip char = 'neon.local'
-                port char = '8080'
-            end
+%             arguments
+%                 ip char = '192.168.1.172'
+%                 % if connected via hotspot, then this address does not
+%                 % work?
+%                 % ip char = 'neon.local'
+%                 port char = '8080'
+%             end
 
             if nargin == 2
                 obj.py_device = py.pupil_labs.realtime_api.simple.discover_one_device(ip, port);
@@ -73,11 +73,11 @@ classdef Device
         end
 
         function [event] = send_event(obj, event_text, timestamp)
-            arguments
-                obj Device
-                event_text char
-                timestamp double = 0
-            end
+%             arguments
+%                 obj Device
+%                 event_text char
+%                 timestamp double = 0
+%             end
 
             if nargin == 2
                 % when sent from MATLAB, all events need a timestamp,
@@ -171,7 +171,7 @@ classdef Device
 
             eye_image = uint8(py.cv2.cvtColor(eye_sample.bgr_pixels, py.cv2.COLOR_BGR2RGB));
             scene_image = uint8(py.cv2.cvtColor(scene_sample.bgr_pixels, py.cv2.COLOR_BGR2RGB));
-
+            
             return;
         end
 
@@ -214,13 +214,13 @@ classdef Device
             estimate.time_offset_ms.mean = est.time_offset_ms.mean;
             estimate.time_offset_ms.median = est.time_offset_ms.median;
             estimate.time_offset_ms.std = est.time_offset_ms.std;
-            estimate.time_offset_ms.measurements = double(est.roundtrip_duration_ms.measurements)';
+%             estimate.time_offset_ms.measurements = double(est.roundtrip_duration_ms.measurements)';
 
             estimate.roundtrip_duration_ms = struct();
             estimate.roundtrip_duration_ms.mean = est.roundtrip_duration_ms.mean;
             estimate.roundtrip_duration_ms.median = est.roundtrip_duration_ms.median;
             estimate.roundtrip_duration_ms.std = est.roundtrip_duration_ms.std;
-            estimate.roundtrip_duration_ms.measurements = double(est.roundtrip_duration_ms.measurements)';
+%             estimate.roundtrip_duration_ms.measurements = double(est.roundtrip_duration_ms.measurements)';
 
             return;
         end

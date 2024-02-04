@@ -6,7 +6,7 @@ classdef SceneGazeSample
 
     properties
         gaze_data struct
-        scene_image (:,:,3) uint8
+        scene_image (:, :, 3) uint8
     end
 
     methods
