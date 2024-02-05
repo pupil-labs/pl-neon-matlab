@@ -17,14 +17,7 @@ classdef Device
     function [obj] = Device(ip, port)
       % no keyword arguments or type specifying of arguments in octave
       
-      pkg_list = pkg('list');
-      for x = 1:numel(pkg_list)
-        if strcmp(pkg_list{x}.name, 'pythonic')
-          if ~pkg_list{x}.loaded
-            pkg load pythonic
-          endif
-        endif
-      endfor
+      check_and_load_pythonic();
       
       pyexec("from pupil_labs.realtime_api.simple import discover_one_device");
       
@@ -62,6 +55,11 @@ classdef Device
       % sending an event when no recording is running
       % is safe. now it is JITed/cached
       obj.py_device.send_event('noop event', 0);
+
+      % due to a peculiarity of Pythonic, it is easiest
+      % to cache the calibration on the Python side here,
+      % to be used later by the GazeMapper class
+      pyexec('py_cached_calibration = device.get_calibration()');
       
       return;
     endfunction
@@ -147,45 +145,34 @@ classdef Device
       return;
     endfunction
     
-    function [scene_image, gaze_data] = receive_matched_scene_video_frame_and_gaze(obj)
+    % function [scene_image, gaze_data] = receive_matched_scene_video_frame_and_gaze(obj)
+    function [sc_gz_sample] = receive_matched_scene_video_frame_and_gaze(obj)
       scene_and_gaze_sample = obj.py_device.receive_matched_scene_video_frame_and_gaze();
       
       scene_sample = scene_and_gaze_sample.frame;
       gaze_sample = scene_and_gaze_sample.gaze;
       
-      gaze_data = struct();
-      gaze_data.x = gaze_sample.x;
-      gaze_data.y = gaze_sample.y;
-      gaze_data.worn = gaze_sample.worn;
-      gaze_data.timestamp_unix_seconds = gaze_sample.timestamp_unix_seconds;
-      
-      scene_image = py.cv2.cvtColor(scene_sample.bgr_pixels, py.cv2.COLOR_BGR2RGB);
-      
+      sc_gz_sample = SceneGazeSample(scene_sample, gaze_sample);
+
       return;
     endfunction
     
-    function [eye_image, scene_image, gaze_data] = receive_matched_scene_and_eyes_video_frames_and_gaze(obj)
+    % function [eye_image, scene_image, gaze_data] = receive_matched_scene_and_eyes_video_frames_and_gaze(obj)
+    function [ey_sc_gz_sample] = receive_matched_scene_and_eyes_video_frames_and_gaze(obj)
       eye_scene_and_gaze_sample = obj.py_device.receive_matched_scene_and_eyes_video_frames_and_gaze();
       
       eye_sample = eye_scene_and_gaze_sample.eyes;
       scene_sample = eye_scene_and_gaze_sample.scene;
       gaze_sample = eye_scene_and_gaze_sample.gaze;
       
-      gaze_data = struct();
-      gaze_data.x = gaze_sample.x;
-      gaze_data.y = gaze_sample.y;
-      gaze_data.worn = gaze_sample.worn;
-      gaze_data.timestamp_unix_seconds = gaze_sample.timestamp_unix_seconds;
-      
-      eye_image = py.cv2.cvtColor(eye_sample.bgr_pixels, py.cv2.COLOR_BGR2RGB);
-      scene_image = py.cv2.cvtColor(scene_sample.bgr_pixels, py.cv2.COLOR_BGR2RGB);
-      
+      ey_sc_gz_sample = EyeSceneGazeSample(eye_sample, scene_sample, gaze_sample);
+
       return;
     endfunction
     
-    function [calib] = get_calibration(obj)
-      calibration = obj.py_device.get_calibration();
-      calibration = cell(calibration.tolist());
+    function [calib_out] = get_calibration(obj)
+      py_calibration = obj.py_device.get_calibration();
+      calibration = cell(py_calibration.tolist());
       calibration = calibration{1};
       
       scene_camera_matrix = calibration{3};
@@ -195,13 +182,15 @@ classdef Device
       left_camera_matrix = calibration{9};
       left_distortion_coefficients = calibration{10};
       
-      calib = struct();
-      calib.scene_camera_matrix = ndarray2mat(scene_camera_matrix, 3, 3, 0);
-      calib.scene_distortion_coefficients = ndarray2mat(scene_distortion_coefficients, 1, 8, 0)';
-      calib.right_camera_matrix = ndarray2mat(right_camera_matrix, 3, 3, 0);
-      calib.right_distortion_coefficients = ndarray2mat(right_distortion_coefficients, 1, 8, 0)';
-      calib.left_camera_matrix = ndarray2mat(left_camera_matrix, 3, 3, 0);
-      calib.left_distortion_coefficients = ndarray2mat(left_distortion_coefficients, 1, 8, 0)';
+      mat_calibration = struct();
+      mat_calibration.scene_camera_matrix = ndarray2mat(scene_camera_matrix, 3, 3, 0);
+      mat_calibration.scene_distortion_coefficients = ndarray2mat(scene_distortion_coefficients, 1, 8, 0)';
+      mat_calibration.right_camera_matrix = ndarray2mat(right_camera_matrix, 3, 3, 0);
+      mat_calibration.right_distortion_coefficients = ndarray2mat(right_distortion_coefficients, 1, 8, 0)';
+      mat_calibration.left_camera_matrix = ndarray2mat(left_camera_matrix, 3, 3, 0);
+      mat_calibration.left_distortion_coefficients = ndarray2mat(left_distortion_coefficients, 1, 8, 0)';
+
+      calib_out = Calibration(py_calibration, mat_calibration);
       
       return;
     endfunction

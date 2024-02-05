@@ -9,7 +9,7 @@ function [mat] = ndarray2mat(arr, nr, nc, nl)
       for y = 1:nr
         r = arr{y};
         for x = 1:nc
-          mat(y, x) = r{x};
+          mat(y, x) = py.float(r{x});
         endfor
       endfor
     endif

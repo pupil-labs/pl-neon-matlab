@@ -26,6 +26,7 @@ Once Python is installed, start a terminal (Go to Start Menu and then enter "cmd
 ```
 pip install opencv-python
 pip install pupil-labs-realtime-api
+pip install real-time-screen-gaze
 ```
 
 Now, put Device.m, get_ns.m and ndarray2mat.m from the matlab folder somewhere on your MATLAB path.
@@ -43,6 +44,7 @@ If you do not use a Python version manager, then the following is sufficient:
 ```
 pip3 install opencv-python
 pip3 install pupil-labs-realtime-api
+pip3 install real-time-screen-gaze
 ```
 
 If you use a Python version manager, like pyenv, then you need to make especially certain that your system-provided pip is used.
@@ -62,6 +64,7 @@ If you do not use a Python version manager, then the following is sufficient:
 ```
 pip3 install opencv-python
 pip3 install pupil-labs-realtime-api
+pip3 install real-time-screen-gaze
 ```
 
 If you use a Python version manager, like pyenv, then you need to make especially certain that your system-provided pip is used. On Ubuntu 20.04 LTS, the following will do it:
@@ -69,6 +72,7 @@ If you use a Python version manager, like pyenv, then you need to make especiall
 ```
 /usr/bin/pip3.10 install opencv-python
 /usr/bin/pip3.10 install pupil-labs-realtime-api
+/usr/bin/pip3.10 install real-time-screen-gaze
 ```
 
 Now, put Device.m, get_ns.m and ndarray2mat.m from the matlab folder somewhere on your MATLAB path.
@@ -86,7 +90,7 @@ If you have reason to use Octave, first note the following:
 That said, it is free and open-source.
 
 If you have need for the Octave-Neon integration, then keep in mind
-that there is presently no clean and fast way to convert numpy arrays to Octave arrays.
+that there is presently no clean and fast way to convert large numpy arrays to Octave arrays.
 This means that you will not be able to inspect the eye or scene camera video frames.
 Otherwise, there is feature parity with the MATLAB integration.
 

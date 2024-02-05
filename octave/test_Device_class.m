@@ -117,7 +117,7 @@ for x = 1:500
     tic;
     device.receive_gaze_datum();
     t(x) = toc;
-end
+endfor
 
 figure(3);
 hold on;

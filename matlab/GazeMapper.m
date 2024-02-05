@@ -1,5 +1,5 @@
 classdef GazeMapper
-    properties(Access = private)
+    properties(GetAccess = private, SetAccess = immutable)
         py_gaze_mapper
     end
 

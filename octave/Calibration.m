@@ -1,16 +1,17 @@
 classdef Calibration
-    properties(GetAccess = ?GazeMapper, SetAccess = immutable)
+    % octave does not have immutable properties
+    properties(GetAccess = ?GazeMapper, SetAccess = private)
         py_calibration
-    end
+    endproperties
 
     properties
-        scene_camera_matrix (3, 3) double
-        scene_distortion_coefficients (8, 1) double
-        right_camera_matrix (3, 3) double
-        right_distortion_coefficients (8, 1) double
-        left_camera_matrix (3, 3) double
-        left_distortion_coefficients (8, 1) double
-    end
+        scene_camera_matrix
+        scene_distortion_coefficients
+        right_camera_matrix
+        right_distortion_coefficients
+        left_camera_matrix
+        left_distortion_coefficients
+    endproperties
 
     methods
         function [obj] = Calibration(py_calibration, calibration)
@@ -24,6 +25,6 @@ classdef Calibration
             obj.left_distortion_coefficients = calibration.left_distortion_coefficients;
 
             return;
-        end
-    end
-end
+        endfunction
+    endmethods
+endclassdef
