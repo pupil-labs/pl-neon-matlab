@@ -1,16 +1,18 @@
-# Pupil Labs Neon-Psychtoolbox integration
+# Pupil Labs Neon-MATLAB/Octave integration
 
 This integration leverages MATLAB and Octave's Python interfaces to directly run functions from the
 [Pupil Labs Real-Time API](https://github.com/pupil-labs/realtime-python-api) and [Real-time Screen Gaze](https://github.com/pupil-labs/real-time-screen-gaze) Python packages.
 This means you will need to have an installation of Python on your computer.
 For users who are new to Python, please see [the installation and usage instructions below](#installation).
 
-# Necessary: Psychtoolbox
+# Necessary: Psychtoolbox & Python
 
 This package requires the installation of Psychtoolbox for accurate timestamping of events. Please see [the standard Psychtoolbox installation instructions](
 http://psychtoolbox.org/download.html) and first make sure that Psychtoolbox is properly installed and functioning. You can do this, after the Psychtoolbox setup has finished, by restarting MATLAB and then entering ```AssertOpenGL``` and ```KbCheck``` at the MATLAB command line. If you do not receive any error messages, then Psychtoolbox is properly installed and functioning.
 
-# Anaconda and miniconda Python
+Now, you can proceed to the steps below for installing Python.
+
+## Anaconda and miniconda Python
 
 The Anaconda/miniconda Python suite is popular and user-friendly, but it might be difficult to get it working well with MATLAB and Octave. We have not tested this, so if you use Anaconda, you will need to consult [the MATLAB-Python documentation](https://www.mathworks.com/help/matlab/python-language.html) while following our installation instructions below.
 
