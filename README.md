@@ -5,20 +5,10 @@ This integration leverages MATLAB and Octave's Python interfaces to directly run
 This means you will need to have an installation of Python on your computer.
 For users who are new to Python, please see [the installation and usage instructions below](#installation).
 
-# First things first: Psychtoolbox
+# Necessary: Psychtoolbox
 
 This package requires the installation of Psychtoolbox for accurate timestamping of events. Please see [the standard Psychtoolbox installation instructions](
 http://psychtoolbox.org/download.html) and first make sure that Psychtoolbox is properly installed and functioning. You can do this, after the Psychtoolbox setup has finished, by restarting MATLAB and then entering ```AssertOpenGL``` and ```KbCheck``` at the MATLAB command line. If you do not receive any error messages, then Psychtoolbox is properly installed and functioning.
-
-# System Compatibility
-
-This integration has been tested on:
-
-- Windows 11
-- Ubuntu 20.04 LTS
-- MacOS 11.6.7 (Macbook Pro, Late 2013)
-
-Both the MATLAB and Octave implementations have been tested for speed, stability, and numerical consistency on all platforms. For example, on the old Macbook Pro with Python 3.7 and Matlab R2019a, the speed of common function calls was 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python packages on modern systems.
 
 # Anaconda and miniconda Python
 
@@ -122,3 +112,13 @@ pkg install -forge pythonic
 ```
 
 Then, check [octave/basic_example.m](octave/basic_example.m) and [octave/gaze_mapping_example.m](octave/gaze_mapping_example.m) for examples of how to use our Neon integration.
+
+# System compatibility & tests
+
+This integration has been tested on:
+
+- Windows 11
+- Ubuntu 20.04 LTS
+- MacOS 11.6.7 (Macbook Pro, Late 2013)
+
+Both the MATLAB and Octave implementations have been tested for speed, stability, and numerical consistency on all platforms. For example, on the old Macbook Pro with Python 3.7 and Matlab R2019a, the speed of common function calls was 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python packages on modern systems.
