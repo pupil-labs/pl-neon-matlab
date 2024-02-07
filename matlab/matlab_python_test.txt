@@ -12,10 +12,12 @@ current matlab cost
 	- many universities and labs have up-to-date licenses for matlab
 	- do we get in trouble since i am using an academic license?
 
-- it seems the packages need to be first loaded into python one time before they become compiled/available to matlab? is this mac specific?
+- it seems the packages need to be first loaded into python one time before they become byte-compiled/available to matlab? is this mac specific?
 - then restart matlab
 
 - check effect of red battery on eye/scene image quality
+
+Gaze at -0.13086217641830444, 1.164201259613037
 
 for python3.7, need the following:
 	opencv-python==4.5.1.48

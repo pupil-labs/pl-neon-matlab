@@ -1,83 +1,101 @@
 # Pupil Labs Neon-Psychtoolbox integration
 
-Use MATLAB and Octave's Python interfaces to run functions directly from the 
-pupil-labs-realtime-api.
+This integration leverages MATLAB and Octave's Python interfaces to directly run functions from the
+[Pupil Labs Real-Time API](https://github.com/pupil-labs/realtime-python-api) and [Real-time Screen Gaze](https://github.com/pupil-labs/real-time-screen-gaze) Python packages.
+This means you will need to have an installation of Python on your computer.
+For users who are new to Python, please see [the installation and usage instructions below](#installation).
 
-This package requires the installation of Psychtoolbox for accurate timestamping of events. Please see the standard Psychtoolbox installation instructions and first make sure that Psychtoolbox is properly installed and functioning:
+This package also requires the installation of Psychtoolbox for accurate timestamping of events. Please see [the standard Psychtoolbox installation instructions](
+http://psychtoolbox.org/download.html) and first make sure that Psychtoolbox is properly installed and functioning.
 
-http://psychtoolbox.org/download.html
+This integration has been tested on Ubuntu 20.04 LTS, MacOS 11.6.7 (Macbook Pro, Late 2013), and Windows 11. Both the MATLAB and Octave implementations have been tested for speed, stability, and numerical consistency on all platforms. For example, on the old Macbook Pro with Python 3.7 and Matlab R2019a, the speed of common function calls was 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python packages on modern systems.
 
-Note that this package is currently only tested on Ubuntu 20.04 LTS.
+# Anaconda and miniconda Python
+
+The Anaconda/miniconda Python suite is popular and user-friendly, but it might be difficult to get it working well with MATLAB and Octave. We have not tested this, so if you use Anaconda, you will need to consult [the MATLAB-Python documentation](https://www.mathworks.com/help/matlab/python-language.html) while following our installation instructions below.
 
 # Installation
 
-## Windows
+## MATLAB
 
-### MATLAB
+You will need MATLAB R2019a or later, as our Python packages require Python version 3.7 or newer. Check [the MATLAB-Python compatability table](https://www.mathworks.com/support/requirements/python-compatibility.html) for more information.
 
-MATLAB will connect to your system provided Python by default. It is easiest to install a version of Python provided by the Python Software Foundation on the Windows Store. We recommend Python 3.11 (the latest when this document was created). You can find it here:
+On all systems, MATLAB will connect to your system-provided Python by default and on Linux, it will not see Python packages installed by the package manager (e.g., apt on Ubuntu).
+In case you are not a Python user, we provide brief instructions below for installing Python on Windows. If you are on MacOS or Linux, then you already have Python pre-installed.
+We also provide steps below to get the necessary Python packages on each system.
+If you do not want to use the system-provided Python, then please see [the corresponding MATLAB documentation](https://www.mathworks.com/help/matlab/python-language.html) about how to change the Python version that MATLAB uses.
 
-https://apps.microsoft.com/detail/9NRWMJP3717K?hl=en-us&gl=US
+After you have Python and the necessary Python packages, you can put the files in the matlab folder somewhere on your MATLAB path.
+Then, check matlab/basic_example.m and matlab/gaze_mapping_example.m for examples of how to use our Neon integration.
+
+### Windows
+
+It is recommended by the Python Software Foundation to install a version of Python from the Windows Store. We recommend Python 3.11 (the latest when this document was created). You can find it [here](https://apps.microsoft.com/detail/9NRWMJP3717K?hl=en-us&gl=US).
 
 Ensure that it is from the "Python Software Foundation". It should be free of charge.
 
-Once Python is installed, start a terminal (Go to Start Menu and then enter "cmd.exe"). Then, enter the following to install the necessary packages:
+Once Python is installed, start a terminal (Go to the Start Menu and then enter "cmd.exe"). Then, enter the following to install the necessary packages:
 
 ```
 pip install opencv-python
+pip install opencv-contrib-python
 pip install pupil-labs-realtime-api
 pip install real-time-screen-gaze
 ```
 
-Now, put Device.m, get_ns.m and ndarray2mat.m from the matlab folder somewhere on your MATLAB path.
+### MacOS and Linux
 
-Then, check matlab/test_Device_class.m for examples of how to use our Neon integration.
+You will need to open a terminal. On MacOS, start Terminal.app. It is assumed that if you are on Linux, then you already know how to start a terminal.
 
-## MacOS
-
-### MATLAB
-
-MATLAB will connect to your system provided Python by default. It will not see the packages that are installed via the package manager, so you need to first install the required packages with the system-provided pip.
-
-If you do not use a Python version manager, then the following is sufficient:
+If you are new to Python and do not know which version is installed on your system, then enter the following:
 
 ```
-pip3 install opencv-python
+python3 --version
+```
+
+If the answer is version 3.8, then you need to install the following packages:
+
+```
+pip3 install opencv-python==4.5.1.48
+pip3 install opencv-contrib-python==4.5.1.48
 pip3 install pupil-labs-realtime-api
 pip3 install real-time-screen-gaze
 ```
 
-If you use a Python version manager, like pyenv, then you need to make especially certain that your system-provided pip is used.
-
-Now, put Device.m, get_ns.m and ndarray2mat.m from the matlab folder somewhere on your MATLAB path.
-
-Then, check matlab/test_Device_class.m for examples of how to use our Neon integration.
-
-## Linux (Ubuntu)
-
-### MATLAB
-
-MATLAB will connect to your system provided Python by default. It will not see the packages that are installed via the package manager (e.g., apt on Ubuntu), so you need to first install the required packages with the system-provided pip.
-
-If you do not use a Python version manager, then the following is sufficient:
+If you are not on version 3.8 and you do not use a Python version manager, then the following is sufficient (if you don't know what a version manager is, then you are most likely not using a version manager):
 
 ```
 pip3 install opencv-python
+pip3 install opencv-contrib-python
 pip3 install pupil-labs-realtime-api
 pip3 install real-time-screen-gaze
 ```
 
-If you use a Python version manager, like pyenv, then you need to make especially certain that your system-provided pip is used. On Ubuntu 20.04 LTS, the following will do it:
+On MacOS, after the packages have been installed you need to start Python one time and import the packages. Enter the following:
 
 ```
-/usr/bin/pip3.10 install opencv-python
-/usr/bin/pip3.10 install pupil-labs-realtime-api
-/usr/bin/pip3.10 install real-time-screen-gaze
+python3
 ```
 
-Now, put Device.m, get_ns.m and ndarray2mat.m from the matlab folder somewhere on your MATLAB path.
+A Python session will start. Now enter the following:
 
-Then, check matlab/test_Device_class.m for examples of how to use our Neon integration.
+```
+import cv2
+import numpy
+import pupil_labs.realtime_api.simple
+import pupil_labs.real_time_screen_gaze.gaze_mapper
+import pupil_labs.real_time_screen_gaze.marker_generator
+```
+
+It might take a moment for each of those commands to complete. You can then quit Python by entering the following:
+
+```
+exit()
+```
+
+Now, close the terminal. Then, restart MATLAB, copy the files in the matlab folder to your MATLAB path, and you should be good to go.
+
+If you use a Python version manager, like pyenv, or you use a Homebrew version of Python on MacOS, then you will need to consult [the MATLAB documentation](https://www.mathworks.com/help/matlab/python-language.html) about how to configure everything correctly.
 
 ## Octave (all systems)
 
@@ -91,12 +109,12 @@ That said, it is free and open-source.
 
 If you have need for the Octave-Neon integration, then keep in mind
 that there is presently no clean and fast way to convert large numpy arrays to Octave arrays.
-This means that you will not be able to inspect the eye or scene camera video frames.
-Otherwise, there is feature parity with the MATLAB integration.
+This means that you will not be able to inspect the eye or scene camera video frames, although you can pass them onwards to other Python functions.
+Otherwise, there is feature parity with the MATLAB integration. Just make sure you are running a relatively recent version of Octave from the last year or so ([upgrading is free and fast!](https://octave.org/)).
 
 First, follow the same install steps as those for MATLAB for your system, making sure to put the functions from the octave folder on your Octave path. Do not use the functions in the matlab folder for an Octave installation.
 
-If you are on Linux, then you will need to install the development files for Octave. On Ubuntu, run the following command in the terminal:
+If you are on Linux, then you need to install the development files for Octave. On Ubuntu, run the following command in the terminal:
 
 ```
 sudo apt install liboctave-dev
@@ -108,4 +126,4 @@ Next, install the pythonic package from Octave Forge. Run the following command 
 pkg install -forge pythonic
 ```
 
-Then, check octave/test_Device_class.m for examples of how to use our Neon integration.
+Then, check octave/basic_example.m and octave/gaze_mapping_example.m for examples of how to use our Neon integration.
