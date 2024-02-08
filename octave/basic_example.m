@@ -35,32 +35,34 @@ disp(device.send_event('test event 2', get_ns()));
 % event 1 is sent before recording starts.
 % so send another test even to be sure also works when no timestamp provided by
 % user
-disp(device.send_event('test event 3 (from octave!)'));
+disp(device.send_event('test event 3 (from octave on Windows!)'));
 
 device.recording_stop_and_save();
 
 %% receive scene and gaze data
 
-[scene_image, gaze_sample] = device.receive_matched_scene_video_frame_and_gaze();
+% [scene_image, gaze_sample] = device.receive_matched_scene_video_frame_and_gaze();
+sc_gz_sample = device.receive_matched_scene_video_frame_and_gaze();
 
 figure(1);
 % imshow(scene_image);
 axis on;
 hold on;
-plot(gaze_sample.x, gaze_sample.y, 'ro', 'MarkerSize', 30, 'LineWidth', 4);
+plot(sc_gz_sample.gaze_data.x, sc_gz_sample.gaze_data.y, 'ro', 'MarkerSize', 30, 'LineWidth', 4);
 
 %% receive eye, scene and gaze data
 
-[eye_image, scene_image, gaze_sample] = device.receive_matched_scene_and_eyes_video_frames_and_gaze();
+% [eye_image, scene_image, gaze_sample] = device.receive_matched_scene_and_eyes_video_frames_and_gaze();
+ey_sc_gz_sample = device.receive_matched_scene_and_eyes_video_frames_and_gaze();
 
 figure(2);
 subplot(1, 2, 1);
-% imshow(eye_image);
+% imshow(ey_sc_gz_sample.eye_image);
 subplot(1, 2, 2);
-% imshow(scene_image);
+% imshow(ey_sc_gz_sample.scene_image);
 axis on;
 hold on;
-plot(gaze_sample.x, gaze_sample.y, 'ro', 'MarkerSize', 30, 'LineWidth', 4);
+plot(ey_sc_gz_sample.gaze_data.x, ey_sc_gz_sample.gaze_data.y, 'ro', 'MarkerSize', 30, 'LineWidth', 4);
 
 %% investigate IMU data
 
