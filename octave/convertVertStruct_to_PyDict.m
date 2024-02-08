@@ -14,7 +14,8 @@ function [pyd_out] = convertVertStruct_to_PyDict(verts_struct)
         pyd{fn(2:end)} = vert_list;
     end
 
-    pyd_out = pyrunfile('convert_ids.py', 'marker_verts_corr_ids', marker_verts=pyd);
+    py.sys.path.insert(int32(0), "convert_ids.py");
+    pyd_out = py.convert_ids.convert_ids(pyd);
 
     return;
 end

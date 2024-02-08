@@ -129,6 +129,12 @@ Then, after you have added the files in the [octave folder](octave/) to your Oct
 
 If you are asked to allow network connections, then choose "allow".
 
+# FAQ
+
+- Do I need to be concerned when I see the message, ```unable to create requested socket pair```?
+
+    If working on Windows, you might briefly see this message when initiating a connection with Neon via the ```Device``` command. This message can be safely ignored. As long as you can send messages to Neon and remotely control it, then you are good to go.
+
 # System compatibility & tests
 
 This integration has been tested on:
@@ -137,4 +143,4 @@ This integration has been tested on:
 - Ubuntu 20.04 LTS
 - MacOS 11.6.7 (Macbook Pro, Late 2013)
 
-Both the MATLAB and Octave implementations have been tested for speed, stability, and numerical consistency on all platforms. For example, on the old Macbook Pro with Python 3.7 and Matlab R2019a, the speed of common function calls was 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python packages on modern systems.
+Both the MATLAB and Octave implementations have been tested for speed, stability, and numerical consistency on all platforms. For example, on the old Macbook Pro with Python 3.7 and Matlab R2019a, the speed of common function calls was 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python packages on modern systems, as desired.

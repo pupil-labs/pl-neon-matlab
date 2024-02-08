@@ -1,3 +1,9 @@
 - fix/improve datetime function for octave
-- 'unable to create requested socket pair' can be ignored
-- fix pyrunfile problem in octave
+- detail what to do about 'ServerDisconnectedError: Server disconnected'
+    - check stream option on app, probably shows "waiting for dns service". you need to restart phone?
+    - it might ask you again to allow permissions for neon. make sure to select "always"
+
+- and the 'Error on stream: RTSPConnectionError('RTSP connection lost: [Errno 104] Connection reset by peer'). Reconnecting...'
+error
+- also can ignore 'no RTP received for 10 seconds: closing'? it caused matlab to lock up
+- also can ignore 'error on received data: InvalidStateError'? this one was odd and verbose

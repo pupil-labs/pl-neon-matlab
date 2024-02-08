@@ -11,7 +11,7 @@ function [mat] = ndarray2mat(arr)
         for x = 1:sh(1)
             acx = ac{x};
             for y = 1:sh(2)
-                mat(x, :) = double(acx{y});
+                mat(x, y) = double(acx{y});
             end
         end
     elseif length(sh) == 3

@@ -6,9 +6,11 @@ function [dt] = secToDateTime(s)
     fracSeconds = double(ns_u64 - uint64(wholeSeconds)*1e9)/1e9;
     
     lt = localtime(wholeSeconds);
+    lt.usec = fracSeconds * 1000000;
+    
     dt = strftime("%Y-%m-%d %X", lt);
     
-    % maybe just call out to python for this
+    % maybe just call out to python for this?
 
     return;
 endfunction

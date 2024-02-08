@@ -41,8 +41,8 @@ for sgc = 1:numel(surface_gazes)
    disp(['Gaze at ', num2str(surface_gaze.x), ', ', num2str(surface_gaze.y)]);
 endfor
 
-figure(2);
-imshow(sc_gz_sample.scene_image);
+% figure(2);
+% imshow(sc_gz_sample.scene_image);
 
 %%
 
