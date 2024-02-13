@@ -218,16 +218,16 @@ This integration has been tested for speed, stability, and numerical consistency
 
 | OS | Environment | Python version | Tested & works |
 | -- | ----------- | -------------- | -------------- |
-| Windows 11 | MATLAB R2023b | 3.10 | Yes |
-| Windows 11 | Octave 7.3.0 with Psychtoolbox ([See above](#windows-psychtoolbox-and-octave)) | 3.10 | Yes |
-| Windows 11 | Octave 8.4.0 without Psychtoolbox ([See above](#windows-psychtoolbox-and-octave)) | 3.10 | Yes |
-| Ubuntu 20.04 LTS | MATLAB R2023b | 3.10 | Yes |
-| Ubuntu 20.04 LTS | Octave 6.4.0 (installed from Apt repository) | 3.10 | Yes |
-| MacOS Sonoma (14.3.1); M2 Macbook Air | MATLAB R2023b without Psychtoolbox | 3.10 | Yes |
-| MacOS Sonoma (14.3.1); M2 Macbook Air | MATLAB R2023b (Intel version) with Psychtoolbox (Rosetta) | 3.10 | Yes |
-| MacOS Sonoma (14.3.1); M2 Macbook Air | Octave 8.4.0 without Psychtoolbox | 3.10 | Yes |
-| MacOS Sonoma (14.3.1); M2 Macbook Air | Octave 8.4.0 with Psychtoolbox | 3.10 | No. [See above](#octave-all-systems) |
-| MacOS Big Sur (11.6.7); Intel Macbook Pro, Late 2013 | MATLAB R2019a | 3.7 (deprecated) | Yes
-| MacOS Big Sur (11.6.7); Intel Macbook Pro, Late 2013 | Octave 7.1.0 with Psychtoolbox | 3.7 (deprecated) | Yes
+| Windows 11 | MATLAB R2023b | 3.10 | Yes :green_heart: |
+| Windows 11 | Octave 7.3.0 with Psychtoolbox ([See above](#windows-psychtoolbox-and-octave)) | 3.10 | Yes :green_heart: |
+| Windows 11 | Octave 8.4.0 without Psychtoolbox ([See above](#windows-psychtoolbox-and-octave)) | 3.10 | Yes :green_heart: |
+| Ubuntu 20.04 LTS | MATLAB R2023b | 3.10 | Yes :green_heart: |
+| Ubuntu 20.04 LTS | Octave 6.4.0 (installed from Apt repository) | 3.10 | Yes :green_heart: |
+| MacOS Sonoma (14.3.1); M2 Macbook Air | MATLAB R2023b without Psychtoolbox | 3.10 | Yes :green_heart: |
+| MacOS Sonoma (14.3.1); M2 Macbook Air | MATLAB R2023b (Intel version) with Psychtoolbox (Rosetta) | 3.10 | Yes :green_heart: |
+| MacOS Sonoma (14.3.1); M2 Macbook Air | Octave 8.4.0 without Psychtoolbox | 3.10 | Yes :green_heart: |
+| MacOS Sonoma (14.3.1); M2 Macbook Air | Octave 8.4.0 with Psychtoolbox | 3.10 | No. :x: [See above](#octave-all-systems) |
+| MacOS Big Sur (11.6.7); Intel Macbook Pro, Late 2013 | MATLAB R2019a | 3.7 (deprecated) | Yes :green_heart: |
+| MacOS Big Sur (11.6.7); Intel Macbook Pro, Late 2013 | Octave 7.1.0 with Psychtoolbox | 3.7 (deprecated) | Yes :green_heart: |
 
 All systems passed a small stress test. For example, on the old Macbook Pro with Python 3.7 and MATLAB R2019a, the speed of common function calls was 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python packages on modern systems, as desired.
