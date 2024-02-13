@@ -13,6 +13,8 @@ We also depend on a function from Psychtoolbox, so let's take care of that first
 This package requires the installation of Psychtoolbox for accurate timestamping of events. Please see [the standard Psychtoolbox installation instructions](
 http://psychtoolbox.org/download.html) and first make sure that Psychtoolbox is properly installed and functioning. You can do this after the Psychtoolbox setup has finished, by restarting MATLAB/Octave and then entering ```AssertOpenGL``` and ```KbCheck``` at the MATLAB/Octave command line. If you do not receive any error messages, then Psychtoolbox is properly installed and functioning.
 
+## Windows, Psychtoolbox, and Octave
+
 Note that if you want to use Octave on Windows, then you must install version 7.3 of Octave for Psychtoolbox to work correctly. Use the mirror link at the bottom of [the Windows install instructions for Octave](https://octave.org/download#ms-windows) to find a list of older binaries.
 
 Now, you can proceed to the steps below for setting up Python.
@@ -212,11 +214,20 @@ If you are asked to allow network connections, then choose "allow".
 
 # System compatibility & tests
 
-This integration has been tested on:
+This integration has been tested for speed, stability, and numerical consistency on:
 
-- Windows 11
-- Ubuntu 20.04 LTS
-- MacOS Sonoma (14.3.1); Apple Silicon
-- MacOS Big Sur (11.6.7); Intel Macbook Pro, Late 2013
+| OS | Environment | Python version | Tested & works |
+| -- | ----------- | -------------- | -------------- |
+| Windows 11 | MATLAB R2023b | 3.10 | Yes |
+| Windows 11 | Octave 7.3.0 with Psychtoolbox ([See above](#windows-psychtoolbox-and-octave)) | 3.10 | Yes |
+| Windows 11 | Octave 8.4.0 without Psychtoolbox ([See above](#windows-psychtoolbox-and-octave)) | 3.10 | Yes |
+| Ubuntu 20.04 LTS | MATLAB R2023b | 3.10 | Yes |
+| Ubuntu 20.04 LTS | Octave 6.4.0 (installed from Apt repository) | 3.10 | Yes |
+| MacOS Sonoma (14.3.1); M2 Macbook Air | MATLAB R2023b without Psychtoolbox | 3.10 | Yes |
+| MacOS Sonoma (14.3.1); M2 Macbook Air | MATLAB R2023b (Intel version) with Psychtoolbox (Rosetta) | 3.10 | Yes |
+| MacOS Sonoma (14.3.1); M2 Macbook Air | Octave 8.4.0 without Psychtoolbox | 3.10 | Yes |
+| MacOS Sonoma (14.3.1); M2 Macbook Air | Octave 8.4.0 with Psychtoolbox | 3.10 | No. [See above](#octave-all-systems) |
+| MacOS Big Sur (11.6.7); Intel Macbook Pro, Late 2013 | MATLAB R2019a | 3.7 (deprecated) | Yes
+| MacOS Big Sur (11.6.7); Intel Macbook Pro, Late 2013 | Octave 7.1.0 with Psychtoolbox | 3.7 (deprecated) | Yes
 
-Both the MATLAB and Octave implementations have been tested for speed, stability, and numerical consistency. For example, on the old Macbook Pro with Python 3.7 and MATLAB R2019a, the speed of common function calls was 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python packages on modern systems, as desired.
+All systems passed a small stress test. For example, on the old Macbook Pro with Python 3.7 and MATLAB R2019a, the speed of common function calls was 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python packages on modern systems, as desired.

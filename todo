@@ -1,5 +1,3 @@
-- fix/improve datetime function for octave
-
 - what about the 'Error on stream: RTSPConnectionError('RTSP connection lost: [Errno 104] Connection reset by peer'). Reconnecting...'
 error?
 
