@@ -230,4 +230,4 @@ This integration has been tested for speed, stability, and numerical consistency
 | MacOS Big Sur (11.6.7); Intel Macbook Pro, Late 2013 | MATLAB R2019a | 3.7 (deprecated) | Yes :green_heart: |
 | MacOS Big Sur (11.6.7); Intel Macbook Pro, Late 2013 | Octave 7.1.0 with Psychtoolbox | 3.7 (deprecated) | Yes :yellow_heart: (on this configuration, the ```receive_gaze_datum``` call took 0.0074 seconds on average) |
 
-All systems passed a small stress test. For example, on the old Macbook Pro with Python 3.7 and MATLAB R2019a, the speed of the ```receive_gaze_datum``` function call was 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python packages on modern systems, as desired.
+All systems marked with a heart in the table above have passed a small stress test. For example, on the old Macbook Pro with Python 3.7 and MATLAB R2019a, the speed of the ```receive_gaze_datum``` function call was 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python packages on modern systems, as desired.
