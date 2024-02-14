@@ -108,12 +108,8 @@ classdef Device
       event.name = char(evt.name);
       event.recording_id = char(evt.recording_id);
       event.timestamp_unix_ns = double(evt.timestamp);
-<<<<<<< HEAD
-      event.datetime = datestr(datenum(char(evt.datetime)(1:end-3), 'yyyy-mm-dd HH:MM:SS.FFF'));
-=======
       dtime = char(evt.datetime);
       event.datetime = datestr(datenum(dtime(1:end-3), 'yyyy-mm-dd HH:MM:SS.FFF'));
->>>>>>> a87e307 (split examples into sep folder, add error catching, fix errors found by dom)
       
       return;
     endfunction
