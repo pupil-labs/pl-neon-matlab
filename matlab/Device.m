@@ -23,12 +23,24 @@ classdef Device
 %             end
 
             if nargin == 2
-                obj.py_device = py.pupil_labs.realtime_api.simple.discover_one_device(ip, port);
+                try
+                    disp('Searching for device...');
+                    obj.py_device = py.pupil_labs.realtime_api.simple.discover_one_device(ip, port);
+                catch e
+                    error('Could not find device at the given IP address and port.');
+                end
             elseif nargin == 0
-                obj.py_device = py.pupil_labs.realtime_api.simple.discover_one_device();
+                try
+                    disp('Searching for device...');
+                    obj.py_device = py.pupil_labs.realtime_api.simple.discover_one_device();
+                catch e
+                    error('Could not find any device.');
+                end
             else
                 error('Device either needs IP address AND port of a specific Neon device or give no inputs and it will search for a Neon device.');
             end
+
+            disp('Device found!');
 
             % matlab does automatic type conversion here
             obj.phone_ip = obj.py_device.phone_ip;
