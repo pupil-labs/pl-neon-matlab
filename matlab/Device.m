@@ -1,4 +1,4 @@
-classdef Device
+classdef Device < handle
     properties (GetAccess = private, SetAccess = immutable)
         py_device
     end
@@ -69,6 +69,10 @@ classdef Device
             obj.py_device.send_event('noop event', 0);
 
             return;
+        end
+
+        function delete(obj)
+            obj.close();
         end
 
         function [rid] = recording_start(obj)
