@@ -19,7 +19,7 @@ try
         tic;
         device.receive_gaze_datum();
         t(x) = toc;
-    endfor
+    end
 
     figure(3);
     hold on;
@@ -31,4 +31,6 @@ try
 catch e
     disp(['Error: ', e.message]);
     device.close();
+    __py_objstore_clear__();
+    clear device;
 end

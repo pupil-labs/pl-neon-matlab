@@ -61,4 +61,5 @@ try
 catch e
     disp(['Error: ', e.message]);
     device.close();
+    clear device;
 end

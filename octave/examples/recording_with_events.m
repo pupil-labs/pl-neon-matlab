@@ -37,4 +37,6 @@ try
 catch e
     disp(['Error: ', e.message]);
     device.close();
+    __py_objstore_clear__();
+    clear device;
 end

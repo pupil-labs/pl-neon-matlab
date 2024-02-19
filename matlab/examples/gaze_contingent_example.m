@@ -61,8 +61,10 @@ try
             Screen('DrawTexture', window, marker_texs(x), [], marker_verts(x, :));
         end
 
+        % was the surface detected?
         if ~isempty(result)
             surface_gazes = result.mapped_gaze{screen_surface.uid};
+            % is the observer's gaze on the surface?
             if ~isempty(surface_gazes)
                 surface_gaze = surface_gazes{1};
 

@@ -43,7 +43,7 @@ try
    for sgc = 1:numel(surface_gazes)
       surface_gaze = surface_gazes{sgc};
       disp(['Gaze at ', num2str(surface_gaze.x), ', ', num2str(surface_gaze.y)]);
-   endfor
+   end
 
    % figure(2);
    % imshow(sc_gz_sample.scene_image);
@@ -54,4 +54,6 @@ try
 catch e
     disp(['Error: ', e.message]);
     device.close();
+    __py_objstore_clear__();
+    clear device;
 end
