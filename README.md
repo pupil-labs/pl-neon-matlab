@@ -7,15 +7,15 @@ For users who are new to Python, please see [the Python setup instructions below
 
 This package is completely stand-alone and can be used on its own. It can be used alongside psychophysics toolboxes, such as [Psychtoolbox](http://psychtoolbox.org/) and [mgl](https://gru.stanford.edu/doku.php/mgl/overview), as well as in conjunction with neuroscience/physiology toolboxes. If you prefer, you can use Psychtoolbox functions to timestamp events.
 
-# Python Setup
+## Python Setup
 
 Below, we provide installation instructions for MATLAB. If you are an Octave user, then please see [these instructions](octave/README.md).
 
-## Anaconda and miniconda Python
+### Anaconda and miniconda Python
 
 The Anaconda/miniconda Python suite is popular and user-friendly, but it might be difficult to get it working well with MATLAB and Octave. We have not tested this, so if you want to use Anaconda with MATLAB, you will need to consult [the MATLAB-Python documentation](https://www.mathworks.com/help/matlab/python-language.html) while following our installation instructions below.
 
-## MATLAB
+### MATLAB
 
 You will need MATLAB R2019a or later, as our Python packages require Python version 3.7 or newer. You will also need a version of Python that is compatible with your MATLAB version. Check [the MATLAB-Python compatability table](https://www.mathworks.com/support/requirements/python-compatibility.html) for more information.
 
@@ -23,7 +23,7 @@ We provide steps below to get our Neon Python packages installed on each system.
 
 In case you are not a Python user, we also provide brief tips below for installing Python on Windows and MacOS. If you are on Linux, then you already have Python pre-installed. Note that if you receive unexpected Python errors from MATLAB, then you are most likely using incompatible Python and MATLAB versions.
 
-## Windows
+#### Windows
 <details>
     <summary>View instructions</summary>
 
@@ -45,7 +45,7 @@ pip3 install real-time-screen-gaze
 If you are a new Python user or you are satisified with the default Python 3 on your system, then you can close the terminal and you should restart MATLAB. Now, you can [start testing the Neon integration](#using-the-neon-integration). If you instead want to use a specific Python version or you use a Python version manager, like pyenv, then change the ```pip3``` commands above accordingly and make sure to consult [the MATLAB documentation](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html) about how to configure everything correctly.
 </details>
 
-## Linux
+#### Linux
 <details>
     <summary>View instructions</summary>
 
@@ -65,7 +65,7 @@ If you are a new Python user or you are satisified with the default Python 3 on 
 Note that on Linux, MATLAB will not see Python packages installed by the package manager (e.g., apt on Ubuntu).
 </details>
 
-## MacOS
+#### MacOS
 <details>
     <summary>View instructions</summary>
 
@@ -156,7 +156,7 @@ If you are asked to allow network connections or to allow MATLAB to communicate 
 
     This message is in principle harmless and you can continue using the Neon integration as usual.
 
-# System compatibility & tests
+## System compatibility & tests
 
 This integration has been tested for speed, stability, and numerical consistency on the following platforms:
 
