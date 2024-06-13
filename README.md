@@ -120,7 +120,7 @@ After you have installed a compatible copy of Python, you will need to open a te
 <details>
     <summary>Apple Silicon Mac</summary>
 
-***NOTE: If you intend to use this package with Psychtoolbox on an Apple Silicon Mac, then you must follow the [alternate installation instructions](./psychtoolbox_apple_silicon.md).***
+***NOTE: If you intend to use this package in MATLAB with Psychtoolbox on an Apple Silicon Mac, then you must follow the [alternate installation instructions](./psychtoolbox_apple_silicon.md).***
 
 Otherwise, install a compatible copy of Python. Then:
 
