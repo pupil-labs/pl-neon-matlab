@@ -9,7 +9,7 @@ This package is completely stand-alone and can be used on its own. It can be use
 
 ## Python Setup
 
-Below, we provide installation instructions for MATLAB. If you are an Octave user, then please see [these instructions](octave/README.md).
+Here, we provide installation instructions for using MATLAB with Python. If you are an Octave user, then please see [these instructions](octave/README.md).
 
 ### Anaconda and miniconda Python
 
