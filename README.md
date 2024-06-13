@@ -33,16 +33,18 @@ If you are a new Python user, then it is [recommended by Mathworks](https://www.
 
 If you already have a version of Python that you would like to use, then check the [MATLAB documentation about configuring your system](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html).
 
-Once Python is ready, start a terminal (Go to the Start Menu and then enter "cmd.exe"). Then, enter the following to install the necessary packages:
+Once Python is ready, start a terminal (Go to the Start Menu and then enter "cmd.exe"). Then:
 
-```
-pip3 install opencv-python
-pip3 install opencv-contrib-python
-pip3 install pupil-labs-realtime-api
-pip3 install real-time-screen-gaze
-```
+1. Enter the following to install the necessary packages:
+    ```
+    pip3 install opencv-python
+    pip3 install opencv-contrib-python
+    pip3 install pupil-labs-realtime-api
+    pip3 install real-time-screen-gaze
+    ```
+    If you are a new Python user or you are satisified with the default Python 3 on your system, then you can skip to the next step. If you instead want to use a specific Python version or you use a Python version manager, like pyenv, then change the ```pip3``` commands above accordingly and make sure to consult [the MATLAB documentation](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html) about how to configure everything correctly.
 
-If you are a new Python user or you are satisified with the default Python 3 on your system, then you can close the terminal and you should restart MATLAB. Now, you can [start testing the Neon integration](#using-the-neon-integration). If you instead want to use a specific Python version or you use a Python version manager, like pyenv, then change the ```pip3``` commands above accordingly and make sure to consult [the MATLAB documentation](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html) about how to configure everything correctly.
+2. Close the terminal and restart MATLAB. Now, you can [start testing the Neon integration](#using-the-neon-integration).
 </details>
 
 #### Linux
@@ -51,16 +53,18 @@ If you are a new Python user or you are satisified with the default Python 3 on 
 
 If you are on Linux, then your system already provides Python and MATLAB will automatically use this version.
 
-To install the necessary packages, you will need to open a terminal and enter the following:
+To get started, you will need to open a terminal. Then:
 
-```
-pip3 install opencv-python
-pip3 install opencv-contrib-python
-pip3 install pupil-labs-realtime-api
-pip3 install real-time-screen-gaze
-```
+1. Enter the following:
+    ```
+    pip3 install opencv-python
+    pip3 install opencv-contrib-python
+    pip3 install pupil-labs-realtime-api
+    pip3 install real-time-screen-gaze
+    ```
+    If you are a new Python user or you are satisified with the default Python 3 on your system, then you can skip to the next step. If you instead want to use a specific Python version or you use a Python version manager, like pyenv, then change the ```pip3``` commands above accordingly and make sure to check the [MATLAB-Python documentation about configuring your system](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html).
 
-If you are a new Python user or you are satisified with the default Python 3 on your system, then you can restart MATALB and [start testing the Neon integration](#using-the-neon-integration). If you instead want to use a specific Python version or you use a Python version manager, like pyenv, then change the ```pip3``` commands above accordingly and make sure to check the [MATLAB-Python documentation about configuring your system](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html).
+2. Restart MATALB and [start testing the Neon integration](#using-the-neon-integration).
 
 Note that on Linux, MATLAB will not see Python packages installed by the package manager (e.g., apt on Ubuntu).
 </details>
@@ -79,57 +83,58 @@ If you would rather use a Python version that you already have or you want to us
 
 Once Python is ready, then continue with the steps below that are appropriate for your Mac.
 
-#### Intel Mac
+<details>
+    <summary>Intel Mac</summary>
 
-After you have installed a compatible copy of Python, you will need to open a terminal by starting Terminal.app. Now, enter the following in the terminal to install the necessary packages:
+After you have installed a compatible copy of Python, you will need to open a terminal by starting Terminal.app and then:
 
-```
-pip3 install opencv-python
-pip3 install opencv-contrib-python
-pip3 install pupil-labs-realtime-api
-pip3 install real-time-screen-gaze
-```
+1. Enter the following in the terminal to install the necessary packages:
+    ```
+    pip3 install opencv-python
+    pip3 install opencv-contrib-python
+    pip3 install pupil-labs-realtime-api
+    pip3 install real-time-screen-gaze
+    ```
+    If you have multiple copies of Python installed, then you will need to change ```pip3``` to point to the Python installation that you want to use.
 
-If you have multiple copies of Python installed, then you will need to change ```pip3``` to point to the Python installation that you want to use.
+2. On Intel Macs, after the packages have been installed, you need to start Python one time and import the packages. Do that by first entering the following in the terminal:
+    ```
+    python3
+    ```
+3. A Python session will start. Now enter the following:
+    ```
+    import cv2
+    import numpy
+    import pupil_labs.realtime_api.simple
+    import pupil_labs.real_time_screen_gaze.gaze_mapper
+    import pupil_labs.real_time_screen_gaze.marker_generator
+    ```
+    It might take a few moments for each of those commands to complete.
+4. You can then quit Python by entering the following:
+    ```
+    exit()
+    ```
+5. Now, close the terminal. Restart MATLAB and you can [start testing the Neon integration](#using-the-neon-integration).
+</details>
 
-On Intel Macs, after the packages have been installed, you need to start Python one time and import the packages. Do that by first entering the following in the terminal:
+<details>
+    <summary>Apple Silicon Mac</summary>
 
-```
-python3
-```
+***NOTE: If you intend to use this package with Psychtoolbox on an Apple Silicon Mac, then you must follow the [alternate installation instructions](./psychtoolbox_apple_silicon.md).***
 
-A Python session will start. Now enter the following:
+Otherwise, install a compatible copy of Python. Then:
 
-```
-import cv2
-import numpy
-import pupil_labs.realtime_api.simple
-import pupil_labs.real_time_screen_gaze.gaze_mapper
-import pupil_labs.real_time_screen_gaze.marker_generator
-```
+1. Open Terminal.app and run:
+    ```
+    pip3 install opencv-python
+    pip3 install opencv-contrib-python
+    pip3 install pupil-labs-realtime-api
+    pip3 install real-time-screen-gaze
+    ```
+    If you are a new Python user, then the commands above are sufficient and you can move to the next step. If you want to use a specific Python version, then change the ```pip3``` command to point to the Python installation that you want to use with MATLAB.
 
-It might take a few moments for each of those commands to complete. You can then quit Python by entering the following:
-
-```
-exit()
-```
-
-Now, close the terminal. Then, restart MATLAB and you can [start testing the Neon integration](#using-the-neon-integration).
-
-#### Apple Silicon Mac
-
-After you have installed a compatible copy of Python, you can open Terminal.app and run:
-
-```
-pip3 install opencv-python
-pip3 install opencv-contrib-python
-pip3 install pupil-labs-realtime-api
-pip3 install real-time-screen-gaze
-```
-
-If you are a new Python user, then the commands above are sufficient and you can move to the next step. If you want to use a specific Python version, then change the ```pip3``` command to point to the Python installation that you want to use with MATLAB.
-
-Now, close the terminal. Then, restart MATLAB and you can [start testing the Neon integration](#using-the-neon-integration).
+2. Now, close the terminal. Restart MATLAB and you can [start testing the Neon integration](#using-the-neon-integration).
+</details>
 </details>
 
 ## Using the Neon integration
