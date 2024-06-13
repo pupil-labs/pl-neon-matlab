@@ -12,7 +12,8 @@ function [dt] = secToDateTime(s)
     
     % just call out to python for this.
     % the pure octave approach is not as clean as the pure matlab approach
-    dt = py.datetime.fromtimestamp(s);
+
+    dt = py.datetime.date.fromtimestamp(s);
 
     return;
 endfunction

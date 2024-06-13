@@ -22,14 +22,26 @@ classdef Device
       pyexec("from pupil_labs.realtime_api.simple import discover_one_device");
       
       if nargin == 2
-        pyexec(['device = discover_one_device(', ip, ', ', port, ')']);
-        obj.py_device = pyeval("device");
+        try 
+          disp('Searching for device...');
+          pyexec(['device = discover_one_device(', ip, ', ', port, ')']);
+          obj.py_device = pyeval("device");
+        catch e
+          error('Could not find device at the given IP address and port.');
+        end
       elseif nargin == 0
-        pyexec('device = discover_one_device()');
-        obj.py_device = pyeval("device");
+        try
+          disp('Searching for device...');
+          pyexec('device = discover_one_device()');
+          obj.py_device = pyeval("device");
+        catch e
+          error('Could not find any device.');
+        end
       else
         error('Device either needs IP address AND port of a specific Neon device or give no inputs and it will search for a Neon device.');
       endif
+
+      disp('Device found!');
       
       obj.phone_ip = char(obj.py_device.phone_ip);
       obj.phone_name = char(obj.py_device.phone_name);
@@ -96,7 +108,8 @@ classdef Device
       event.name = char(evt.name);
       event.recording_id = char(evt.recording_id);
       event.timestamp_unix_ns = double(evt.timestamp);
-      event.datetime = datestr(datenum(evt.datetime(1:end-3), 'yyyy-mm-dd HH:MM:SS.FFF'));
+      dtime = char(evt.datetime);
+      event.datetime = datestr(datenum(dtime(1:end-3), 'yyyy-mm-dd HH:MM:SS.FFF'));
       
       return;
     endfunction

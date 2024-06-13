@@ -15,7 +15,24 @@ classdef GazeMapper
         end
 
         function [screen_surface] = add_surface(obj, marker_verts, screen_size)
-            py_marker_verts = convertVertStruct_to_PyDict(marker_verts);
+            % marker_verts enters in the following form:
+            % n squares by 4 coords, 2 for top-left corner and 2 for
+            % bottom-right corner
+            py_compat_verts = struct();
+            for n = 1:size(marker_verts, 1)
+                marker_vert = squeeze(marker_verts(n, :));
+                topl = marker_vert(1:2);
+                botr = marker_vert(3:4);
+                py_compat_verts.(['m', num2str(n-1)]) = {
+                        topl, ...
+                        [botr(1), topl(2)], ...
+                        botr, ...
+                        [topl(1), botr(2)]
+                    };
+            end
+
+            % py_marker_verts = convertVertStruct_to_PyDict(marker_verts);
+            py_marker_verts = convertVertStruct_to_PyDict(py_compat_verts);
 
             screen_surface = obj.py_gaze_mapper.add_surface(py_marker_verts, screen_size);
 
