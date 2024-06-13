@@ -72,7 +72,7 @@ classdef Device < handle
         end
 
         function delete(obj)
-            obj.close();
+            obj.py_device.close();
         end
 
         function [rid] = recording_start(obj)
