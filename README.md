@@ -95,7 +95,7 @@ After you have installed a compatible copy of Python, you will need to open a te
     pip3 install pupil-labs-realtime-api
     pip3 install real-time-screen-gaze
     ```
-    If you have multiple copies of Python installed, then you will need to change ```pip3``` to point to the Python installation that you want to use.
+    If you are a new Python user, then the commands above are sufficient and you can move to the next step. If you want to use a specific Python version, then change the ```pip3``` command to point to the Python installation that you want to use with MATLAB.
 
 2. On Intel Macs, after the packages have been installed, you need to start Python one time and import the packages. Do that by first entering the following in the terminal:
     ```
