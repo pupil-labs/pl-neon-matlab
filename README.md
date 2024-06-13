@@ -9,7 +9,7 @@ This package is completely stand-alone and can be used on its own. It can be use
 
 ## Python Setup
 
-Here, we provide installation instructions for using MATLAB with Python. If you are an Octave user, then please see [these instructions](octave/README.md).
+Here, we provide installation instructions for using MATLAB with our Python packages. If you are an Octave user, then please see [the Octave instructions](octave/README.md).
 
 ### Anaconda and miniconda Python
 
@@ -33,7 +33,7 @@ If you are a new Python user, then it is [recommended by Mathworks](https://www.
 
 ***Installing Python from the Windows Store will not work!***
 
-If you already have a version of Python that you would like to use, then check the [MATLAB documentation about configuring your system](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html).
+If you already have a version of Python that you would like to use, then check the [MATLAB documentation about configuring your system](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html#buialof-39).
 
 Once Python is ready, start a terminal (Go to the Start Menu and then enter "cmd.exe"). Then:
 
@@ -44,7 +44,7 @@ Once Python is ready, start a terminal (Go to the Start Menu and then enter "cmd
     pip3 install pupil-labs-realtime-api
     pip3 install real-time-screen-gaze
     ```
-    If you are a new Python user or you are satisified with the default Python 3 on your system, then you can skip to the next step. If you instead want to use a specific Python version or you use a Python version manager, like pyenv, then change the ```pip3``` commands above accordingly and make sure to consult [the MATLAB documentation](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html) about how to configure everything correctly.
+    If you are a new Python user or you are satisified with the default Python 3 on your system, then you can skip to the next step. If you instead want to use a specific Python version or you use a Python version manager, like pyenv, then change the ```pip3``` commands above accordingly and make sure to consult [the MATLAB documentation](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html#buialof-39) about how to configure everything correctly.
 
 2. Close the terminal and restart MATLAB. Now, you can [start testing the Neon integration](#using-the-neon-integration).
 </details>
@@ -53,7 +53,7 @@ Once Python is ready, start a terminal (Go to the Start Menu and then enter "cmd
 <details>
     <summary>View instructions</summary>
 
-If you are on Linux, then your system already provides Python and MATLAB will automatically use this version.
+If you are on Linux, then your system already provides Python and MATLAB will automatically use this version. Just make sure that [your Python and MATLAB versions are compatible](https://www.mathworks.com/support/requirements/python-compatibility.html).
 
 To get started, you will need to open a terminal. Then:
 
@@ -64,7 +64,7 @@ To get started, you will need to open a terminal. Then:
     pip3 install pupil-labs-realtime-api
     pip3 install real-time-screen-gaze
     ```
-    If you are a new Python user or you are satisified with the default Python 3 on your system, then you can skip to the next step. If you instead want to use a specific Python version or you use a Python version manager, like pyenv, then change the ```pip3``` commands above accordingly and make sure to check the [MATLAB-Python documentation about configuring your system](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html).
+    If you are a new Python user or you are satisified with the default Python 3 on your system, then you can skip to the next step. If you instead want to use a specific Python version or you use a Python version manager, like pyenv, then change the ```pip3``` commands above accordingly and make sure to check the [MATLAB-Python documentation about configuring your system](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html#buialof-40).
 
 2. Restart MATALB and [start testing the Neon integration](#using-the-neon-integration).
 
@@ -77,11 +77,9 @@ Note that on Linux, MATLAB will not see Python packages installed by the package
 
 For MacOS, the installation steps depend on whether you have an Apple Silicon Mac (M1, M2, or M3) or an Intel Mac. You can find out by clicking the Apple Icon in the top left corner of your desktop and going to "About this Mac".
 
-For all Macs, you will need a Python version that is [compatible with your MATLAB version](https://www.mathworks.com/support/requirements/python-compatibility.html).
-
 Note that [Mathworks recommends](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html) installing Python from [python.org](https://www.python.org/) on MacOS. If you already have Python installed from a different source on your Mac, then installing an additional version from [python.org](https://www.python.org/) will not overwrite your current installation, although it might temporarily alter your system path.
 
-If you would rather use a Python version that you already have or you want to use a Python version manager, like pyenv, or a Homebrew version of Python on MacOS, then you will need to consult [the MATLAB documentation](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html) about how to configure everything correctly.
+If you would rather use a Python version that you already have or you want to use a Python version manager, like pyenv, or a Homebrew version of Python on MacOS, then you will need to consult [the MATLAB documentation](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html#buialof-40) about how to configure everything correctly.
 
 Once Python is ready, then continue with the steps below that are appropriate for your Mac.
 
