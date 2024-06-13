@@ -7,7 +7,7 @@ For users who are new to Python, please see [the Python setup instructions below
 
 This package is completely stand-alone and can be used on its own. It can be used alongside psychophysics toolboxes, such as [Psychtoolbox](http://psychtoolbox.org/) and [mgl](https://gru.stanford.edu/doku.php/mgl/overview), as well as in conjunction with neuroscience/physiology toolboxes. If you prefer, you can use Psychtoolbox functions to timestamp events.
 
-## Python Setup
+## MATLAB+Python Setup
 
 Here, we provide installation instructions for using MATLAB with our Python packages. If you are an Octave user, then please see [the Octave instructions](octave/README.md).
 
