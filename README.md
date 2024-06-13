@@ -159,7 +159,7 @@ If you are asked to allow network connections or to allow MATLAB to communicate 
 
 - I repeatedly get the message, ```'no RTP received for 10 seconds: closing'```.
 
-    This message is in principle harmless and you can continue using the Neon integration as usual.
+    This diagnostic message is in principle harmless and you can continue using the Neon integration as usual.
 
 ## System compatibility & tests
 
