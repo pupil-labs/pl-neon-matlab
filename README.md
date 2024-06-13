@@ -17,7 +17,9 @@ The Anaconda/miniconda Python suite is popular and user-friendly, but it might b
 
 ### MATLAB
 
-You will need MATLAB R2019a or later, as our Python packages require Python version 3.7 or newer. You will also need a version of Python that is compatible with your MATLAB version. Check [the MATLAB-Python compatability table](https://www.mathworks.com/support/requirements/python-compatibility.html) for more information.
+**Please note:** Due to changes in MATLAB R2024a, this package is not yet supported there. Please do not use a version newer than R2023b for now.
+
+You will need MATLAB R2019a or later (up to and including R2023b), as our Python packages require Python version 3.7 or newer. You will also need a version of Python that is compatible with your MATLAB version. Check [the MATLAB-Python compatability table](https://www.mathworks.com/support/requirements/python-compatibility.html) for more information.
 
 We provide steps below to get our Neon Python packages installed on each system.
 
