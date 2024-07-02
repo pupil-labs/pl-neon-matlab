@@ -25,7 +25,7 @@ classdef Device < handle
             if nargin == 2
                 try
                     disp('Searching for device...');
-                    obj.py_device = py.pupil_labs.realtime_api.simple.Device(ip, port);
+                    obj.py_device = py.pupil_labs.realtime_api.simple.Device(ip, uint32(port));
                 catch e
                     error('Could not find device at the given IP address and port.');
                 end
