@@ -88,6 +88,12 @@ classdef Device < handle
             return;
         end
 
+        function recording_cancel(obj)
+            obj.py_device.recording_cancel();
+
+            return;
+        end
+
         function [event] = send_event(obj, event_text, timestamp)
 %             arguments
 %                 obj Device

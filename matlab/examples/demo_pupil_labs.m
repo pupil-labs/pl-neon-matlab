@@ -87,7 +87,13 @@ try
     % Now stop and save the recording
     device.recording_stop_and_save();
 catch lasterror
+    device.recording_cancel();
     disp(['Error: ', lasterror.message]);
+    try
+        psychrethrow(psychlasterror);
+    end
+    
+    commandwindow;
 end
 
 device.close();
@@ -99,9 +105,3 @@ FlushEvents;
 sca;
 Priority(0);
 ShowCursor;
-
-try
-    psychrethrow(psychlasterror);
-end
-
-commandwindow;
