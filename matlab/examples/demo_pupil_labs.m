@@ -90,7 +90,7 @@ catch lasterror
     device.recording_cancel();
     disp(['Error: ', lasterror.message]);
     try
-        psychrethrow(psychlasterror );
+        psychrethrow(psychlasterror);
     end
     
     commandwindow;
