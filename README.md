@@ -7,7 +7,7 @@ For users who are new to Python, please see [the Python setup instructions below
 
 This package is completely stand-alone and can be used on its own. It can be used alongside psychophysics toolboxes, such as [Psychtoolbox](http://psychtoolbox.org/) and [mgl](https://gru.stanford.edu/doku.php/mgl/overview), as well as in conjunction with neuroscience/physiology toolboxes. If you prefer, you can use Psychtoolbox functions to timestamp events.
 
-Make sure to check out our tutorial on how to use this integration to [track your experiment in MATLAB](https://docs.pupil-labs.com/neon/real-time-api/track-your-experiment-in-matlab/).
+Make sure to check out our guide on how to use this integration to [track your experiment in MATLAB](https://docs.pupil-labs.com/neon/real-time-api/track-your-experiment-in-matlab/).
 
 ## MATLAB+Python Setup
 
