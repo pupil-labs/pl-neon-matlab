@@ -7,9 +7,15 @@ For users who are new to Python, please see [the Python setup instructions below
 
 This package is completely stand-alone and can be used on its own. It can be used alongside psychophysics toolboxes, such as [Psychtoolbox](http://psychtoolbox.org/) and [mgl](https://gru.stanford.edu/doku.php/mgl/overview), as well as in conjunction with neuroscience/physiology toolboxes. If you prefer, you can use Psychtoolbox functions to timestamp events.
 
+Make sure to check out our tutorial on how to use this integration to [track your experiment in MATLAB](https://docs.pupil-labs.com/neon/real-time-api/track-your-experiment-in-matlab/).
+
 ## MATLAB+Python Setup
 
-Here, we provide installation instructions for using MATLAB with our Python packages. If you are an Octave user, then please see [the Octave instructions](octave/README.md).
+Here, we provide installation instructions for using MATLAB with our Python packages.
+
+### Octave
+
+If you are an Octave user, then please see [the dedicated Octave instructions](octave/README.md).
 
 ### Anaconda and miniconda Python
 
@@ -139,14 +145,14 @@ Otherwise, install a compatible copy of Python. Then:
 
 ## Using the Neon integration
 
-After you have installed Python and the necessary Python packages, you can put the files in the [matlab folder](matlab/) of this repository somewhere on your MATLAB path. Then, check [matlab/examples/basic_example.m](matlab/basic_example.m) and [matlab/examples/gaze_mapping_example.m](matlab/gaze_mapping_example.m) for examples of how to use our Neon integration.
+After you have installed Python and the necessary Python packages, you can put the files in the [matlab folder](matlab/) of this repository somewhere on your MATLAB path. Then, check [matlab/examples/basic_recording.m](matlab/examples/basic_recording.m) and [matlab/examples/gaze_mapping_example.m](matlab/examples/gaze_mapping_example.m) for examples of how to use our Neon integration.
 
 If you are asked to allow network connections or to allow MATLAB to communicate on public/private networks, then choose "allow".
 
 ## Troubleshooting
 
 - What if I get the error, ```ServerDisconnectedError: Server disconnected```?
-  - Check the "Stream" section of the Neon Companion app. You will probably see "waiting for dns service". You need to either restart the app or restart the phone.
+  - Check the "Stream" section of the Neon Companion App. You will probably see "waiting for dns service". You need to either force stop and restart app or restart the phone.
   - When you start the Neon Companion app again, it might ask you to allow permissions for Neon. Make sure to select "yes" and "always".
 
 - Do I need to be concerned when I see the message, ```unable to create requested socket pair```?
@@ -155,7 +161,7 @@ If you are asked to allow network connections or to allow MATLAB to communicate 
 
 - I am using Octave and got the message, ```error on received data: InvalidStateError```.
 
-    This error is rare. Restart Octave and that should resolve the issue. If the issue persists, then also restart the Neon Companion phone.
+    This error is rare. Restart Octave and that should resolve the issue. If the issue persists, then also restart the Neon Companion Device.
 
 - I repeatedly get the message, ```'no RTP received for 10 seconds: closing'```.
 

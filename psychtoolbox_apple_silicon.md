@@ -21,4 +21,4 @@ arch -x86_64 python3 -m pip install real-time-screen-gaze
 
 If you are a new Python user, then the commands above are sufficient and you can move to the next step. If you want to use a specific Python version, then change the ```python3``` command to point to the Python installation that you want to use with MATLAB.
 
-Now, close the terminal. Then, restart MATLAB and you can [start testing the Neon integration](#using-the-neon-integration).
+Now, close the terminal. Then, restart MATLAB and you can [start testing the Neon integration](./README.md#using-the-neon-integration).
