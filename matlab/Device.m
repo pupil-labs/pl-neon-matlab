@@ -9,19 +9,14 @@ classdef Device < handle
         battery_level_percent char
         memory_num_free_bytes double
         module_serial char
+        serial_number_glasses char
         clock_offset_ns double
+        is_neon logical
+        is_pupil_invisible logical
     end
 
     methods
         function [obj] = Device(ip, port)
-%             arguments
-%                 ip char = '192.168.1.172'
-%                 % if connected via hotspot, then this address does not
-%                 % work?
-%                 % ip char = 'neon.local'
-%                 port char = '8080'
-%             end
-
             if nargin == 2
                 try
                     disp('Searching for device...');
@@ -47,16 +42,31 @@ classdef Device < handle
             obj.phone_name = obj.py_device.phone_name;
             obj.battery_level_percent = obj.py_device.battery_level_percent;
             obj.memory_num_free_bytes = obj.py_device.memory_num_free_bytes;
+
+            % for Neon
             obj.module_serial = obj.py_device.module_serial;
 
-            % the first time these functions run, they are slow.
-            % then they are JITed (i guess?) and much faster.
-            % so get the JIT/cache process out of the way here,
-            % since these are presumably frequently used functions
+            % for Pupil Invisible
+            obj.serial_number_glasses = obj.py_device.serial_number_glasses;
+
+            % serial_number_glasses is specific to Pupil Invisible
+            obj.is_neon = strcmp(obj.serial_number_glasses, '-1');
+            if obj.is_neon && ~strcmp(obj.phone_name, 'Neon Companion')
+                error('Neon is somehow connected to Pupil Invisible Companion app. This is not supported.');
+            end
+
+            obj.is_pupil_invisible = ~obj.is_neon;
+
+            % initialize common streams
             obj.py_device.receive_matched_scene_video_frame_and_gaze();
-            obj.py_device.receive_matched_scene_and_eyes_video_frames_and_gaze();
-            obj.py_device.receive_imu_datum();
+            obj.py_device.receive_scene_video_frame();
             obj.py_device.receive_gaze_datum();
+
+            % Pupil Invisible does stream IMU data or eye video
+            if obj.is_neon
+                obj.py_device.receive_imu_datum();
+                obj.py_device.receive_eyes_video_frame();
+            end
 
             % for some reason, when sent from MATLAB, the events need a
             % timestamp. otherwise, they are silently dropped on the cloud
@@ -65,7 +75,7 @@ classdef Device < handle
             obj.clock_offset_ns = fix(est.time_offset_ms.mean * 1000000);
 
             % sending an event when no recording is running
-            % is safe. now it is JITed/cached
+            % is safe. now the function is JITed/cached
             obj.py_device.send_event('noop event', 0);
 
             return;
@@ -95,12 +105,6 @@ classdef Device < handle
         end
 
         function [event] = send_event(obj, event_text, timestamp)
-%             arguments
-%                 obj Device
-%                 event_text char
-%                 timestamp double = 0
-%             end
-
             if nargin == 2
                 % when sent from MATLAB, all events need a timestamp,
                 % so attach a manually corrected timestamp
@@ -192,28 +196,46 @@ classdef Device < handle
         end
 
         function [calib_out] = get_calibration(obj)
-            py_calibration = obj.py_device.get_calibration();
-            calibration = cell(py_calibration.tolist());
-            calibration = calibration{1};
+            if obj.is_neon
+                py_calibration = obj.py_device.get_calibration();
+                calibration = cell(py_calibration.tolist());
+                calibration = calibration{1};
+    
+                scene_camera_matrix = calibration(3);
+                scene_distortion_coefficients = calibration(4);
+                scene_extrinsics_affine_matrix = calibration(5);
 
-            scene_camera_matrix = calibration(3);
-            scene_distortion_coefficients = calibration(4);
-            right_camera_matrix = calibration(6);
-            right_distortion_coefficients = calibration(7);
-            left_camera_matrix = calibration(9);
-            left_distortion_coefficients = calibration(10);
+                right_camera_matrix = calibration(6);
+                right_distortion_coefficients = calibration(7);
+                right_extrinsics_affine_matrix = calibration(8);
 
-            mat_calibration = struct();
-            mat_calibration.scene_camera_matrix = ndarray2mat(scene_camera_matrix{1});
-            mat_calibration.scene_distortion_coefficients = ndarray2mat(scene_distortion_coefficients{1});
-            mat_calibration.right_camera_matrix = ndarray2mat(right_camera_matrix{1});
-            mat_calibration.right_distortion_coefficients = ndarray2mat(right_distortion_coefficients{1});
-            mat_calibration.left_camera_matrix = ndarray2mat(left_camera_matrix{1});
-            mat_calibration.left_distortion_coefficients = ndarray2mat(left_distortion_coefficients{1});
+                left_camera_matrix = calibration(9);
+                left_distortion_coefficients = calibration(10);
+                left_extrinsics_affine_matrix = calibration(11);
+    
+                mat_calibration = struct();
+                mat_calibration.scene_camera_matrix = ndarray2mat(scene_camera_matrix{1});
+                mat_calibration.scene_distortion_coefficients = ndarray2mat(scene_distortion_coefficients{1});
+                mat_calibration.scene_extrinsics_affine_matrix = ndarray2mat(scene_extrinsics_affine_matrix{1});
 
-            calib_out = Calibration(py_calibration, mat_calibration);
+                mat_calibration.right_camera_matrix = ndarray2mat(right_camera_matrix{1});
+                mat_calibration.right_distortion_coefficients = ndarray2mat(right_distortion_coefficients{1});
+                mat_calibration.right_extrinsics_affine_matrix = ndarray2mat(right_extrinsics_affine_matrix{1});
 
-            return;
+                mat_calibration.left_camera_matrix = ndarray2mat(left_camera_matrix{1});
+                mat_calibration.left_distortion_coefficients = ndarray2mat(left_distortion_coefficients{1});
+                mat_calibration.left_extrinsics_affine_matrix = ndarray2mat(left_extrinsics_affine_matrix{1});
+    
+                calib_out = Calibration(py_calibration, mat_calibration);
+    
+                return;
+            else
+                warning('Pupil Invisible does not provide camera calibration data over the Real-time API.');
+
+                calib_out = [];
+
+                return;
+            end
         end
 
         function close(obj)
