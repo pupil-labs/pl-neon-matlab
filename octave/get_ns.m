@@ -1,5 +1,5 @@
 function [ns] = get_ns()
-    ns = double(py.time.time_ns());
+    ns = int64(py.time.time_ns());
 
     return;
 endfunction

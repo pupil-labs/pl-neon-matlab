@@ -10,7 +10,10 @@ classdef Device
     battery_level_percent
     memory_num_free_bytes
     module_serial
+    serial_number_glasses
     clock_offset_ns
+    is_neon
+    is_pupil_invisible
   endproperties
   
   methods
@@ -47,22 +50,37 @@ classdef Device
       obj.phone_name = char(obj.py_device.phone_name);
       obj.battery_level_percent = char(obj.py_device.battery_level_percent);
       obj.memory_num_free_bytes = double(obj.py_device.memory_num_free_bytes);
+
+      % for Neon
       obj.module_serial = char(obj.py_device.module_serial);
+
+      % for Pupil Invisible
+      obj.serial_number_glasses = char(obj.py_device.serial_number_glasses);
+
+      % serial_number_glasses is specific to Pupil Invisible
+      obj.is_neon = strcmp(obj.serial_number_glasses, '-1');
+      if obj.is_neon && ~strcmp(obj.phone_name, 'Neon Companion')
+          error('Neon is somehow connected to Pupil Invisible Companion app. This is not supported.');
+      endif
+
+      obj.is_pupil_invisible = ~obj.is_neon;
       
-      % the first time these functions run, they are slow.
-      % then they are JITed (i guess?) and much faster.
-      % so get the JIT/cache process out of the way here,
-      % since these are presumably frequently used functions
+      % initialize common streams
       obj.py_device.receive_matched_scene_video_frame_and_gaze();
-      obj.py_device.receive_matched_scene_and_eyes_video_frames_and_gaze();
-      obj.py_device.receive_imu_datum();
+      obj.py_device.receive_scene_video_frame();
       obj.py_device.receive_gaze_datum();
 
-      % for some reason, when sent from octave, the events need a
-      % timestamp. otherwise, they are silently dropped on the cloud
-      % so, we need to estimate time offset when setting things up
+      % Pupil Invisible does stream IMU data or eye video
+      if obj.is_neon
+          obj.py_device.receive_imu_datum();
+          obj.py_device.receive_eyes_video_frame();
+          obj.py_device.receive_matched_scene_and_eyes_video_frames_and_gaze();
+      endif
+
+      % determine clock offsets upfront, to make it a bit easier for
+      % users
       est = obj.estimate_time_offset();
-      obj.clock_offset_ns = fix(est.time_offset_ms.mean * 1000000);
+      obj.clock_offset_ns = int64(fix(est.time_offset_ms.mean * 1000000));
       
       % sending an event when no recording is running
       % is safe. now it is JITed/cached
@@ -88,18 +106,24 @@ classdef Device
       
       return;
     endfunction
+
+    function recording_cancel(obj)
+      obj.py_device.recording_cancel();
+
+      return;
+    endfunction
     
     function [event] = send_event(obj, event_text, timestamp)
       % no keyword arguments or type specifying of arguments in octave
       
       if nargin == 2
-        % when sent from MATLAB, all events need a timestamp,
+        % when sent from Octave, all events need a timestamp,
         % so attach a manually corrected timestamp
         current_time_ns_in_client_clock = get_ns();
         current_time_ns_in_companion_clock = current_time_ns_in_client_clock - obj.clock_offset_ns;
-        evt = obj.py_device.send_event(event_text, current_time_ns_in_companion_clock);
+        evt = obj.py_device.send_event(event_text, pyargs('event_timestamp_unix_ns', current_time_ns_in_companion_clock));
       elseif nargin == 3
-        evt = obj.py_device.send_event(event_text, timestamp);
+        evt = obj.py_device.send_event(event_text, pyargs('event_timestamp_unix_ns', timestamp));
       else
         error('Event inputs are event text and an (optional) user-supplied timestamp.');
       endif
@@ -107,7 +131,7 @@ classdef Device
       event = struct();
       event.name = char(evt.name);
       event.recording_id = char(evt.recording_id);
-      event.timestamp_unix_ns = double(evt.timestamp);
+      event.timestamp_unix_ns = int64(evt.timestamp);
       dtime = char(evt.datetime);
       event.datetime = datestr(datenum(dtime(1:end-3), 'yyyy-mm-dd HH:MM:SS.FFF'));
       
@@ -190,18 +214,28 @@ classdef Device
       
       scene_camera_matrix = calibration{3};
       scene_distortion_coefficients = calibration{4};
+      scene_extrinsics_affine_matrix = calibration{5};
+
       right_camera_matrix = calibration{6};
       right_distortion_coefficients = calibration{7};
+      right_extrinsics_affine_matrix = calibration{8};
+
       left_camera_matrix = calibration{9};
       left_distortion_coefficients = calibration{10};
+      left_extrinsics_affine_matrix = calibration{11};
       
       mat_calibration = struct();
       mat_calibration.scene_camera_matrix = ndarray2mat(scene_camera_matrix, 3, 3, 0);
       mat_calibration.scene_distortion_coefficients = ndarray2mat(scene_distortion_coefficients, 1, 8, 0)';
+      mat_calibration.scene_extrinsics_affine_matrix = ndarray2mat(scene_extrinsics_affine_matrix, 4, 4, 0);
+
       mat_calibration.right_camera_matrix = ndarray2mat(right_camera_matrix, 3, 3, 0);
       mat_calibration.right_distortion_coefficients = ndarray2mat(right_distortion_coefficients, 1, 8, 0)';
+      mat_calibration.right_extrinsics_affine_matrix = ndarray2mat(right_extrinsics_affine_matrix, 4, 4, 0);
+      
       mat_calibration.left_camera_matrix = ndarray2mat(left_camera_matrix, 3, 3, 0);
       mat_calibration.left_distortion_coefficients = ndarray2mat(left_distortion_coefficients, 1, 8, 0)';
+      mat_calibration.left_extrinsics_affine_matrix = ndarray2mat(left_extrinsics_affine_matrix, 4, 4, 0);
 
       calib_out = Calibration(py_calibration, mat_calibration);
       

@@ -10,7 +10,7 @@ classdef Device < handle
         memory_num_free_bytes double
         module_serial char
         serial_number_glasses char
-        clock_offset_ns double
+        clock_offset_ns int64
         is_neon logical
         is_pupil_invisible logical
     end
@@ -66,13 +66,13 @@ classdef Device < handle
             if obj.is_neon
                 obj.py_device.receive_imu_datum();
                 obj.py_device.receive_eyes_video_frame();
+                obj.py_device.receive_matched_scene_and_eyes_video_frames_and_gaze();
             end
 
-            % for some reason, when sent from MATLAB, the events need a
-            % timestamp. otherwise, they are silently dropped on the cloud
-            % so, we need to estimate time offset when setting things up
+            % determine clock offsets upfront, to make it a bit easier for
+            % users
             est = obj.estimate_time_offset();
-            obj.clock_offset_ns = fix(est.time_offset_ms.mean * 1000000);
+            obj.clock_offset_ns = int64(fix(est.time_offset_ms.mean * 1000000));
 
             % sending an event when no recording is running
             % is safe. now the function is JITed/cached
@@ -104,23 +104,26 @@ classdef Device < handle
             return;
         end
 
-        function [event] = send_event(obj, event_text, timestamp)
+        function [event] = send_event(obj, event_name, timestamp)
             if nargin == 2
                 % when sent from MATLAB, all events need a timestamp,
                 % so attach a manually corrected timestamp
-                current_time_ns_in_client_clock = get_ns();
-                current_time_ns_in_companion_clock = current_time_ns_in_client_clock - obj.clock_offset_ns;
-                evt = obj.py_device.send_event(event_text, current_time_ns_in_companion_clock);
+                % current_time_ns_in_client_clock = get_ns();
+                % current_time_ns_in_companion_clock = current_time_ns_in_client_clock - obj.clock_offset_ns;
+                % evt = obj.py_device.send_event(event_name, current_time_ns_in_companion_clock);
+
+                % `string(missing)` is how you send a "None" value over the MATLAB->Python boundary
+                evt = obj.py_device.send_event(event_name, pyargs('event_timestamp_unix_ns', string(missing)));
             elseif nargin == 3
-                evt = obj.py_device.send_event(event_text, timestamp);
+                evt = obj.py_device.send_event(event_name, pyargs('event_timestamp_unix_ns', timestamp));
             else
-                error('Event inputs are event text and an (optional) user-supplied timestamp.');
+                error('Event inputs are event name (string) and an (optional) user-supplied timestamp.');
             end
 
             event = struct();
             event.name = char(evt.name);
             event.recording_id = char(evt.recording_id);
-            event.timestamp_unix_ns = double(evt.timestamp);
+            event.timestamp_unix_ns = int64(evt.timestamp);
             event.datetime = evt.datetime;
 
             return;
