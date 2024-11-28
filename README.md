@@ -1,9 +1,11 @@
-# Pupil Labs Neon-MATLAB/Octave integration
+# Pupil Labs Neon(+Pupil Invisible)-MATLAB/Octave integration
 
 This integration leverages MATLAB and Octave's Python interfaces to directly run functions from the
 [Pupil Labs Real-Time API](https://github.com/pupil-labs/realtime-python-api) and [Real-time Screen Gaze](https://github.com/pupil-labs/real-time-screen-gaze) Python packages.
 This means you will need to have an installation of Python on your computer.
 For users who are new to Python, please see [the Python setup instructions below](#python-setup).
+
+It is primarily designed with Neon in mind, but it is also compatible with Pupil Invisible.
 
 This package is completely stand-alone and can be used on its own. It can be used alongside psychophysics toolboxes, such as [Psychtoolbox](http://psychtoolbox.org/) and [mgl](https://gru.stanford.edu/doku.php/mgl/overview), as well as in conjunction with neuroscience/physiology toolboxes. If you prefer, you can use Psychtoolbox functions to timestamp events.
 
@@ -23,9 +25,7 @@ The Anaconda/miniconda Python suite is popular and user-friendly, but it might b
 
 ### MATLAB
 
-**Please note:** Due to changes in MATLAB R2024a, this package is not yet supported there. Please do not use a version newer than R2023b for now.
-
-You will need MATLAB R2019a or later (up to and including R2023b), as our Python packages require Python version 3.7 or newer. You will also need a version of Python that is compatible with your MATLAB version. Check [the MATLAB-Python compatability table](https://www.mathworks.com/support/requirements/python-compatibility.html) for more information.
+You will need MATLAB R2021b or later, as our Python packages require Python version 3.9 or newer. You will also need a version of Python that is compatible with your MATLAB version. Check [the MATLAB-Python compatability table](https://www.mathworks.com/support/requirements/python-compatibility.html) for more information.
 
 We provide steps below to get our Neon Python packages installed on each system.
 
@@ -72,7 +72,7 @@ To get started, you will need to open a terminal. Then:
     ```
     If you are a new Python user or you are satisified with the default Python 3 on your system, then you can skip to the next step. If you instead want to use a specific Python version or you use a Python version manager, like pyenv, then change the ```pip3``` commands above accordingly and make sure to check the [MATLAB-Python documentation about configuring your system](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html#buialof-40).
 
-2. Restart MATALB and [start testing the Neon integration](#using-the-neon-integration).
+2. Restart MATLAB and [start testing the Neon integration](#using-the-neon-integration).
 
 Note that on Linux, MATLAB will not see Python packages installed by the package manager (e.g., apt on Ubuntu).
 </details>
