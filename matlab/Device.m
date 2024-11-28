@@ -10,7 +10,6 @@ classdef Device < handle
         memory_num_free_bytes double
         module_serial char
         serial_number_glasses char
-        clock_offset_ns int64
         is_neon logical
         is_pupil_invisible logical
     end
@@ -68,11 +67,6 @@ classdef Device < handle
                 obj.py_device.receive_eyes_video_frame();
                 obj.py_device.receive_matched_scene_and_eyes_video_frames_and_gaze();
             end
-
-            % determine clock offsets upfront, to make it a bit easier for
-            % users
-            est = obj.estimate_time_offset();
-            obj.clock_offset_ns = int64(fix(est.time_offset_ms.mean * 1000000));
 
             % sending an event when no recording is running
             % is safe. now the function is JITed/cached

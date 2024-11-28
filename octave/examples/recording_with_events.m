@@ -12,6 +12,11 @@ try
     disp(['Free storage: ', num2str(round(device.memory_num_free_bytes / 1024^3)), ' GB']);
     disp(['Serial number of connected module: ', device.module_serial]);
 
+    %% detemine clock offset to send offset corrected events
+
+    est = device.estimate_time_offset();
+    clock_offset_ns = int64(fix(est.time_offset_ms.mean * 1000000));
+
     %% send some test events
 
     device.recording_start();
@@ -34,7 +39,7 @@ try
     %
     % https://pupil-labs-realtime-api.readthedocs.io/en/stable/examples/simple.html#send-event
     current_time_ns_in_client_clock = get_ns();
-    current_time_ns_in_neon_clock = current_time_ns_in_client_clock - device.clock_offset_ns;
+    current_time_ns_in_neon_clock = current_time_ns_in_client_clock - clock_offset_ns;
     disp(device.send_event('test event 2', current_time_ns_in_neon_clock));
 
     pause(2);

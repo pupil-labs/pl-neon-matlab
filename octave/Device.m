@@ -116,6 +116,7 @@ classdef Device
     function [event] = send_event(obj, event_name, timestamp)
       % no keyword arguments or type specifying of arguments in octave
       
+      evt = [];
       if nargin == 2
         % when sent from Octave, all events need a timestamp,
         % so attach a manually corrected timestamp
