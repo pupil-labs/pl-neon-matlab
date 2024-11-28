@@ -62,7 +62,7 @@ classdef Device < handle
             obj.py_device.receive_scene_video_frame();
             obj.py_device.receive_gaze_datum();
 
-            % Pupil Invisible does stream IMU data or eye video
+            % Pupil Invisible does not stream IMU data or eye video
             if obj.is_neon
                 obj.py_device.receive_imu_datum();
                 obj.py_device.receive_eyes_video_frame();
@@ -106,12 +106,6 @@ classdef Device < handle
 
         function [event] = send_event(obj, event_name, timestamp)
             if nargin == 2
-                % when sent from MATLAB, all events need a timestamp,
-                % so attach a manually corrected timestamp
-                % current_time_ns_in_client_clock = get_ns();
-                % current_time_ns_in_companion_clock = current_time_ns_in_client_clock - obj.clock_offset_ns;
-                % evt = obj.py_device.send_event(event_name, current_time_ns_in_companion_clock);
-
                 % `string(missing)` is how you send a "None" value over the MATLAB->Python boundary
                 evt = obj.py_device.send_event(event_name, pyargs('event_timestamp_unix_ns', string(missing)));
             elseif nargin == 3

@@ -70,7 +70,7 @@ classdef Device
       obj.py_device.receive_scene_video_frame();
       obj.py_device.receive_gaze_datum();
 
-      % Pupil Invisible does stream IMU data or eye video
+      % Pupil Invisible does not stream IMU data or eye video
       if obj.is_neon
           obj.py_device.receive_imu_datum();
           obj.py_device.receive_eyes_video_frame();
@@ -113,7 +113,7 @@ classdef Device
       return;
     endfunction
     
-    function [event] = send_event(obj, event_text, timestamp)
+    function [event] = send_event(obj, event_name, timestamp)
       % no keyword arguments or type specifying of arguments in octave
       
       if nargin == 2
@@ -121,9 +121,9 @@ classdef Device
         % so attach a manually corrected timestamp
         current_time_ns_in_client_clock = get_ns();
         current_time_ns_in_companion_clock = current_time_ns_in_client_clock - obj.clock_offset_ns;
-        evt = obj.py_device.send_event(event_text, pyargs('event_timestamp_unix_ns', current_time_ns_in_companion_clock));
+        evt = obj.py_device.send_event(event_name, pyargs('event_timestamp_unix_ns', current_time_ns_in_companion_clock));
       elseif nargin == 3
-        evt = obj.py_device.send_event(event_text, pyargs('event_timestamp_unix_ns', timestamp));
+        evt = obj.py_device.send_event(event_name, pyargs('event_timestamp_unix_ns', timestamp));
       else
         error('Event inputs are event text and an (optional) user-supplied timestamp.');
       endif
