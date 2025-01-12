@@ -189,36 +189,36 @@ classdef Device < handle
         function [calib_out] = get_calibration(obj)
             if obj.is_neon
                 py_calibration = obj.py_device.get_calibration();
-                calibration = cell(py_calibration.tolist());
-                calibration = calibration{1};
-    
-                scene_camera_matrix = calibration(3);
-                scene_distortion_coefficients = calibration(4);
-                scene_extrinsics_affine_matrix = calibration(5);
+                % calibration = cell(py_calibration.tolist());
+                % calibration = calibration{1};
 
-                right_camera_matrix = calibration(6);
-                right_distortion_coefficients = calibration(7);
-                right_extrinsics_affine_matrix = calibration(8);
+                % scene_camera_matrix = calibration(3);
+                % scene_distortion_coefficients = calibration(4);
+                % scene_extrinsics_affine_matrix = calibration(5);
 
-                left_camera_matrix = calibration(9);
-                left_distortion_coefficients = calibration(10);
-                left_extrinsics_affine_matrix = calibration(11);
-    
+                % right_camera_matrix = calibration(6);
+                % right_distortion_coefficients = calibration(7);
+                % right_extrinsics_affine_matrix = calibration(8);
+
+                % left_camera_matrix = calibration(9);
+                % left_distortion_coefficients = calibration(10);
+                % left_extrinsics_affine_matrix = calibration(11);
+
                 mat_calibration = struct();
-                mat_calibration.scene_camera_matrix = ndarray2mat(scene_camera_matrix{1});
-                mat_calibration.scene_distortion_coefficients = ndarray2mat(scene_distortion_coefficients{1});
-                mat_calibration.scene_extrinsics_affine_matrix = ndarray2mat(scene_extrinsics_affine_matrix{1});
+                mat_calibration.scene_camera_matrix = ndarray2mat(py_calibration,scene_camera_matrix);
+                mat_calibration.scene_distortion_coefficients = ndarray2mat(py_calibration,scene_distortion_coefficients);
+                mat_calibration.scene_extrinsics_affine_matrix = ndarray2mat(py_calibration,scene_extrinsics_affine_matrix);
 
-                mat_calibration.right_camera_matrix = ndarray2mat(right_camera_matrix{1});
-                mat_calibration.right_distortion_coefficients = ndarray2mat(right_distortion_coefficients{1});
-                mat_calibration.right_extrinsics_affine_matrix = ndarray2mat(right_extrinsics_affine_matrix{1});
+                mat_calibration.right_camera_matrix = ndarray2mat(py_calibration,right_camera_matrix);
+                mat_calibration.right_distortion_coefficients = ndarray2mat(py_calibration,right_distortion_coefficients);
+                mat_calibration.right_extrinsics_affine_matrix = ndarray2mat(py_calibration,right_extrinsics_affine_matrix);
 
-                mat_calibration.left_camera_matrix = ndarray2mat(left_camera_matrix{1});
-                mat_calibration.left_distortion_coefficients = ndarray2mat(left_distortion_coefficients{1});
-                mat_calibration.left_extrinsics_affine_matrix = ndarray2mat(left_extrinsics_affine_matrix{1});
-    
+                mat_calibration.left_camera_matrix = ndarray2mat(py_calibration,left_camera_matrix);
+                mat_calibration.left_distortion_coefficients = ndarray2mat(py_calibration,left_distortion_coefficients);
+                mat_calibration.left_extrinsics_affine_matrix = ndarray2mat(py_calibration,left_extrinsics_affine_matrix);
+
                 calib_out = Calibration(py_calibration, mat_calibration);
-    
+
                 return;
             else
                 warning('Pupil Invisible does not provide camera calibration data over the Real-time API.');
@@ -243,14 +243,14 @@ classdef Device < handle
             estimate.time_offset_ms.mean = est.time_offset_ms.mean;
             estimate.time_offset_ms.median = est.time_offset_ms.median;
             estimate.time_offset_ms.std = est.time_offset_ms.std;
-%             estimate.time_offset_ms.measurements = double(est.roundtrip_duration_ms.measurements)';
+            %             estimate.time_offset_ms.measurements = double(est.roundtrip_duration_ms.measurements)';
             estimate.time_offset_ms.measurements = cellfun(@double, cell(est.roundtrip_duration_ms.measurements))';
 
             estimate.roundtrip_duration_ms = struct();
             estimate.roundtrip_duration_ms.mean = est.roundtrip_duration_ms.mean;
             estimate.roundtrip_duration_ms.median = est.roundtrip_duration_ms.median;
             estimate.roundtrip_duration_ms.std = est.roundtrip_duration_ms.std;
-%             estimate.roundtrip_duration_ms.measurements = double(est.roundtrip_duration_ms.measurements)';
+            %             estimate.roundtrip_duration_ms.measurements = double(est.roundtrip_duration_ms.measurements)';
             estimate.roundtrip_duration_ms.measurements = cellfun(@double, cell(est.roundtrip_duration_ms.measurements))';
 
             return;
