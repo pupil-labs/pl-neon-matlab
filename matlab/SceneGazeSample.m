@@ -20,7 +20,11 @@ classdef SceneGazeSample
             obj.gaze_data.worn = gaze_sample.worn;
             obj.gaze_data.timestamp_unix_seconds = gaze_sample.timestamp_unix_seconds;
 
+            % if isstruct(scene_sample)
             obj.scene_image = uint8(py.cv2.cvtColor(scene_sample.bgr_pixels, py.cv2.COLOR_BGR2RGB));
+            % else
+                % obj.scene_image = scene_sample;
+            % end
         end
     end
 end

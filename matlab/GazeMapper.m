@@ -5,9 +5,9 @@ classdef GazeMapper
 
     methods
         function [obj] = GazeMapper(calibration)
-%             arguments
-%                 calibration Calibration
-%             end
+            %             arguments
+            %                 calibration Calibration
+            %             end
 
             obj.py_gaze_mapper = py.pupil_labs.real_time_screen_gaze.gaze_mapper.GazeMapper(calibration.py_calibration);
 
@@ -24,10 +24,10 @@ classdef GazeMapper
                 topl = marker_vert(1:2);
                 botr = marker_vert(3:4);
                 py_compat_verts.(['m', num2str(n-1)]) = {
-                        topl, ...
-                        [botr(1), topl(2)], ...
-                        botr, ...
-                        [topl(1), botr(2)]
+                    topl, ...
+                    [botr(1), topl(2)], ...
+                    botr, ...
+                    [topl(1), botr(2)]
                     };
             end
 
@@ -40,12 +40,24 @@ classdef GazeMapper
         end
 
         function [res] = process_frame(obj, sc_gz_sample)
-%             arguments
-%                 obj GazeMapper
-%                 sc_gz_sample SceneGazeSample
-%             end
+            %             arguments
+            %                 obj GazeMapper
+            %                 sc_gz_sample SceneGazeSample
+            %             end
 
             res = obj.py_gaze_mapper.process_frame(sc_gz_sample.py_scene_sample, sc_gz_sample.py_gaze_sample);
+
+            return;
+        end
+
+        function process_scene(obj, scene_sample)
+            obj.py_gaze_mapper.process_scene(scene_sample);
+
+            return;
+        end
+
+        function [res] = process_gaze(obj, gaze_sample)
+            res = obj.py_gaze_mapper.process_gaze(gaze_sample.py_gaze_datum);
 
             return;
         end
