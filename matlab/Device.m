@@ -149,15 +149,16 @@ classdef Device < handle
             return;
         end
 
-        function [gaze_data] = receive_gaze_datum(obj)
+        function [gaze_sample] = receive_gaze_datum(obj)
             gaze_sample = obj.py_device.receive_gaze_datum();
+            % pygz = gaze_sample;
 
-            gaze_data = struct();
-            gaze_data.x = gaze_sample.x;
-            gaze_data.y = gaze_sample.y;
-            gaze_data.worn = gaze_sample.worn;
-            gaze_data.timestamp_unix_seconds = gaze_sample.timestamp_unix_seconds;
-            gaze_data.py_gaze_datum = gaze_sample;
+            % gaze_data = struct();
+            % gaze_data.x = gaze_sample.x;
+            % gaze_data.y = gaze_sample.y;
+            % gaze_data.worn = gaze_sample.worn;
+            % gaze_data.timestamp_unix_seconds = gaze_sample.timestamp_unix_seconds;
+            % gaze_data.py_gaze_datum = gaze_sample;
 
             return;
         end
