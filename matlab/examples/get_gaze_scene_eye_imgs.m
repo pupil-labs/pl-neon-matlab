@@ -24,7 +24,7 @@ try
     imshow(sc_gz_sample.scene_image);
     axis on;
     hold on;
-    plot(sc_gz_sample.gaze_data.x, sc_gz_sample.gaze_data.y, 'ro', 'MarkerSize', 30, 'LineWidth', 4);
+    plot(sc_gz_sample.gaze_sample.x, sc_gz_sample.gaze_sample.y, 'ro', 'MarkerSize', 30, 'LineWidth', 4);
 
     %% receive eye, scene and gaze data
 
@@ -38,7 +38,7 @@ try
     imshow(ey_sc_gz_sample.scene_image);
     axis on;
     hold on;
-    plot(ey_sc_gz_sample.gaze_data.x, ey_sc_gz_sample.gaze_data.y, 'ro', 'MarkerSize', 30, 'LineWidth', 4);
+    plot(ey_sc_gz_sample.gaze_sample.x, ey_sc_gz_sample.gaze_sample.y, 'ro', 'MarkerSize', 30, 'LineWidth', 4);
 
     %% close the device
 
