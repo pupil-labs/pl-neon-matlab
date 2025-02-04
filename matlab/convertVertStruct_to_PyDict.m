@@ -12,11 +12,14 @@ function [pyd_out] = convertVertStruct_to_PyDict(verts_struct)
             vert_list.append(py.tuple(vert));
         end
 
-        pyd{fn(2:end)} = vert_list;
+        % pyd{fn(2:end)} = vert_list;
+        pyd{int64(fnc) - 1} = vert_list;
     end
 
+    pyd_out = pyd;
+
 %     pyd_out = pyrunfile('convert_ids.py', 'marker_verts_corr_ids', marker_verts=pyd);
-    pyd_out = py.convert_ids.convert_ids(pyd);
+    % pyd_out = py.convert_ids.convert_ids(pyd);
 
     return;
 end
