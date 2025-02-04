@@ -117,34 +117,34 @@ classdef Device < handle
             return;
         end
 
-        function [imu_data] = receive_imu_datum(obj)
+        function [imu_sample] = receive_imu_datum(obj)
             imu_sample = obj.py_device.receive_imu_datum();
 
-            imu_data = struct();
+            % imu_data = struct();
 
-            imu_data.timestamp_unix_seconds = imu_sample.timestamp_unix_seconds;
+            % imu_data.timestamp_unix_seconds = imu_sample.timestamp_unix_seconds;
 
-            quat = struct();
-            quat.x = imu_sample.quaternion.x;
-            quat.y = imu_sample.quaternion.y;
-            quat.z = imu_sample.quaternion.z;
-            quat.w = imu_sample.quaternion.w;
+            % quat = struct();
+            % quat.x = imu_sample.quaternion.x;
+            % quat.y = imu_sample.quaternion.y;
+            % quat.z = imu_sample.quaternion.z;
+            % quat.w = imu_sample.quaternion.w;
 
-            imu_data.quaternion = quat;
+            % imu_data.quaternion = quat;
 
-            accel_data = struct();
-            accel_data.x = imu_sample.accel_data.x;
-            accel_data.y = imu_sample.accel_data.y;
-            accel_data.z = imu_sample.accel_data.z;
+            % accel_data = struct();
+            % accel_data.x = imu_sample.accel_data.x;
+            % accel_data.y = imu_sample.accel_data.y;
+            % accel_data.z = imu_sample.accel_data.z;
 
-            imu_data.accel_data = accel_data;
+            % imu_data.accel_data = accel_data;
 
-            gyro_data = struct();
-            gyro_data.x = imu_sample.gyro_data.x;
-            gyro_data.y = imu_sample.gyro_data.y;
-            gyro_data.z = imu_sample.gyro_data.z;
+            % gyro_data = struct();
+            % gyro_data.x = imu_sample.gyro_data.x;
+            % gyro_data.y = imu_sample.gyro_data.y;
+            % gyro_data.z = imu_sample.gyro_data.z;
 
-            imu_data.gyro_data = gyro_data;
+            % imu_data.gyro_data = gyro_data;
 
             return;
         end
