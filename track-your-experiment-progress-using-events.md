@@ -8,9 +8,9 @@ In this guide, we will build a simple MATLAB experiment. The experiment will sho
 
 We will use our [pl-neon-matlab](https://github.com/pupil-labs/pl-neon-matlab) integration in this guide. See that link for installation instructions.
 
-::: tip
-A similar guide for tracking an experiment in Python can be found [here](https://pupil-labs.github.io/pl-realtime-api/dev/cookbook/track-your-experiment-progress-using-events/).
-:::
+> [!NOTE]  
+> A similar guide for tracking an experiment in Python can be found [here](https://pupil-labs.github.io/pl-realtime-api/dev/cookbook/track-your-experiment-progress-using-events/).
+
 
 ## Requirements
 
@@ -138,6 +138,6 @@ The Neon-MATLAB integration mirrors [the Python implementation](https://pupil-la
 
 ## Performance
 
-:::tip
-The speed of the `receive_gaze_datum` function call has been measured to be 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python implementation on modern systems.
-:::
+> [!TIP]
+> The speed of the `receive_gaze_datum` function call has been measured to be 0.0055 seconds on average (0.0038 seconds median), matching the speed of the Python implementation on modern systems.
+
